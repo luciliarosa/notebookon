@@ -6,7 +6,6 @@
   <title>Lucilia's Notebook — Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ══ shared base ══ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --paper:#faf7f2; --paper2:#f3efe8; --paper3:#ede8df;
@@ -33,7 +32,7 @@
       background-attachment:fixed;
     }
 
-    /* ══ NAV ══ */
+    /* NAV */
     .nav {
       position:sticky; top:0; z-index:100;
       background:rgba(250,247,242,.92);
@@ -47,7 +46,7 @@
       font-family:var(--font-serif); font-size:16px; font-weight:600;
       color:var(--ink); text-decoration:none;
       display:flex; align-items:center; gap:8px;
-      margin-right:2rem; white-space:nowrap;
+      margin-right:1.5rem; white-space:nowrap;
     }
     .nav-links { display:flex; align-items:center; gap:4px; flex:1; overflow-x:auto; }
     .nav-links::-webkit-scrollbar { display:none; }
@@ -60,7 +59,22 @@
     .nav-link.active { background:var(--ink); color:var(--paper); }
     .nav-sep { width:1px; height:18px; background:var(--rule); margin:0 4px; flex-shrink:0; }
 
-    /* ══ HERO ══ */
+    /* lang toggle — mesmo padrão das outras páginas */
+    .lang-toggle {
+      display:flex; align-items:center; gap:2px;
+      background:var(--paper2); border:1.5px solid var(--rule);
+      border-radius:8px; padding:3px; flex-shrink:0; margin-left:10px;
+    }
+    .lang-btn {
+      font-size:12px; font-weight:700; padding:4px 10px; border-radius:5px;
+      border:none; cursor:pointer; background:transparent; color:var(--ink4);
+      transition:background .15s,color .15s; font-family:var(--font-body);
+      display:flex; align-items:center; gap:5px;
+    }
+    .lang-btn.active { background:#fff; color:var(--ink); box-shadow:0 1px 4px rgba(28,25,23,.10); }
+    .lang-btn:hover:not(.active) { color:var(--ink); }
+
+    /* HERO */
     .hero {
       max-width:860px; margin:0 auto;
       padding:4rem 1.5rem 2.5rem;
@@ -74,42 +88,29 @@
       font-family:var(--font-serif); font-size:clamp(32px,6vw,54px);
       font-weight:600; line-height:1.15; color:var(--ink);
     }
-    .hero-title em {
-      font-style:italic; color:var(--accent);
-    }
-    .hero-sub {
-      font-size:16px; color:var(--ink3); line-height:1.7;
-      max-width:520px;
-    }
+    .hero-title em { font-style:italic; color:var(--accent); }
+    .hero-sub { font-size:16px; color:var(--ink3); line-height:1.7; max-width:520px; }
     .hero-meta {
       display:flex; align-items:center; gap:12px; flex-wrap:wrap;
       margin-top:.5rem;
     }
-    .hero-meta span {
-      font-family:var(--font-mono); font-size:11px; color:var(--ink4);
-    }
+    .hero-meta span { font-family:var(--font-mono); font-size:11px; color:var(--ink4); }
     .hero-meta .dot { width:4px; height:4px; border-radius:50%; background:var(--ink4); }
 
-    /* ══ SECTION ══ */
+    /* PAGE */
     .page { max-width:860px; margin:0 auto; padding:0 1.5rem 5rem; }
     .sec-label {
       font-size:11px; font-weight:700; letter-spacing:.08em;
       text-transform:uppercase; color:var(--ink4);
       margin-bottom:14px; display:flex; align-items:center; gap:8px;
     }
-    .sec-label::after {
-      content:''; flex:1; height:1px; background:var(--rule2);
-    }
+    .sec-label::after { content:''; flex:1; height:1px; background:var(--rule2); }
 
-    /* ══ SUBJECT GRID ══ */
+    /* SUBJECT CARDS */
     .subjects { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; }
     .subject-card {
-      background:#fff;
-      border:1.5px solid var(--rule);
-      border-radius:var(--radius);
-      padding:0;
-      overflow:hidden;
-      box-shadow:var(--shadow);
+      background:#fff; border:1.5px solid var(--rule); border-radius:var(--radius);
+      padding:0; overflow:hidden; box-shadow:var(--shadow);
       text-decoration:none; color:inherit;
       transition:transform .18s,box-shadow .18s;
       display:flex; flex-direction:column;
@@ -117,8 +118,7 @@
     .subject-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
     .subject-card:hover .sc-arrow { opacity:1; transform:translateX(0); }
     .sc-header {
-      padding:20px 20px 14px;
-      border-bottom:1.5px solid var(--rule2);
+      padding:20px 20px 14px; border-bottom:1.5px solid var(--rule2);
       display:flex; align-items:flex-start; justify-content:space-between; gap:8px;
     }
     .sc-icon { font-size:28px; line-height:1; }
@@ -134,62 +134,66 @@
       padding:10px 20px 14px;
       display:flex; align-items:center; gap:6px; flex-wrap:wrap;
     }
-    .sc-tag {
-      font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px;
-    }
+    .sc-tag { font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; }
     .sc-tag.py  { background:#dbeafe; color:#1e40af; }
     .sc-tag.js  { background:#fef9c3; color:#854d0e; }
     .sc-tag.git { background:#fce7f3; color:#9d174d; }
     .sc-tag.db  { background:#dcfce7; color:#166534; }
     .sc-tag.gray{ background:var(--paper3); color:var(--ink3); }
-    .sc-count {
-      margin-left:auto; font-family:var(--font-mono);
-      font-size:11px; color:var(--ink4);
-    }
+    .sc-tag.en  { background:#ede9fe; color:#5b21b6; }
+    .sc-count { margin-left:auto; font-family:var(--font-mono); font-size:11px; color:var(--ink4); }
 
-    /* ══ LESSON LIST inside subject ══ */
-    .lessons-toggle { display:none; }
+    /* LESSONS */
     .lessons-panel {
       border-top:1.5px solid var(--rule2);
-      padding:0;
       max-height:0; overflow:hidden;
       transition:max-height .3s ease;
     }
     .subject-card.open .lessons-panel { max-height:400px; }
-    .subject-card.open .sc-toggle-btn { color:var(--accent); }
     .sc-toggle-btn {
       font-size:11px; font-weight:700; color:var(--accent2);
       background:none; border:none; cursor:pointer;
-      padding:0; margin-left:4px;
-      transition:color .15s;
+      padding:0; margin-left:4px; transition:color .15s;
     }
     .lesson-link {
       display:flex; align-items:center; gap:10px;
-      padding:11px 20px;
-      font-size:13px; font-weight:600; color:var(--ink2);
-      text-decoration:none;
-      border-bottom:1px solid var(--rule2);
+      padding:11px 20px; font-size:13px; font-weight:600; color:var(--ink2);
+      text-decoration:none; border-bottom:1px solid var(--rule2);
       transition:background .15s, color .15s;
     }
     .lesson-link:last-child { border-bottom:none; }
     .lesson-link:hover { background:var(--paper2); color:var(--accent2); }
-    .lesson-link .ll-num {
-      font-family:var(--font-mono); font-size:10px; color:var(--ink4);
-      min-width:22px;
-    }
-    .lesson-link .ll-badge {
-      margin-left:auto; font-size:10px; font-weight:700;
-      padding:2px 7px; border-radius:10px;
-    }
-    .ll-badge.new { background:#fce7f3; color:#9d174d; }
-    .ll-badge.done{ background:#dcfce7; color:#166534; }
+    .lesson-link .ll-num { font-family:var(--font-mono); font-size:10px; color:var(--ink4); min-width:22px; }
+    .lesson-link .ll-badge { margin-left:auto; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; }
+    .ll-badge.new  { background:#fce7f3; color:#9d174d; }
+    .ll-badge.done { background:#dcfce7; color:#166534; }
 
-    /* ══ PINNED NOTE ══ */
+    /* PROFILE BUTTONS */
+    .profile-btn {
+      display:flex; align-items:center; gap:16px;
+      background:#fff; border:1.5px solid var(--rule); border-radius:var(--radius);
+      padding:14px 20px; text-decoration:none; color:inherit;
+      box-shadow:var(--shadow); margin-bottom:1rem;
+      transition:transform .18s,box-shadow .18s;
+    }
+    .profile-btn:hover { transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+    .pb-left { flex-shrink:0; }
+    .pb-avatar {
+      width:44px; height:44px; border-radius:50%;
+      background:linear-gradient(135deg,#fce7f3,#dbeafe);
+      border:2px solid #f9a8d4;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-serif); font-size:18px; font-weight:600; color:#be185d;
+    }
+    .pb-center { flex:1; }
+    .pb-name { font-size:14px; font-weight:700; color:var(--ink); margin-bottom:2px; }
+    .pb-role { font-size:12px; color:var(--ink3); }
+    .pb-right { font-size:12px; font-weight:700; color:var(--accent2); white-space:nowrap; flex-shrink:0; }
+
+    /* PINNED NOTE */
     .pinned {
-      background:#fffbeb;
-      border:1.5px solid rgba(180,140,20,.25);
-      border-radius:var(--radius);
-      padding:16px 20px;
+      background:#fffbeb; border:1.5px solid rgba(180,140,20,.25);
+      border-radius:var(--radius); padding:16px 20px;
       display:flex; gap:12px; align-items:flex-start;
       margin-bottom:2rem;
     }
@@ -197,7 +201,7 @@
     .pinned h4 { font-size:13px; font-weight:700; color:#92400e; margin-bottom:3px; }
     .pinned p  { font-size:12px; color:#a16207; line-height:1.6; }
 
-    /* ══ FOOTER ══ */
+    /* FOOTER */
     .footer {
       max-width:860px; margin:0 auto;
       padding:1.5rem 1.5rem 3rem;
@@ -207,14 +211,10 @@
     }
     .footer span { font-size:12px; color:var(--ink4); font-family:var(--font-mono); }
 
-    @media(max-width:600px){
-      .nav { padding:0 1rem; }
-      .hero { padding:2.5rem 1rem 2rem; }
-      .page { padding:0 1rem 4rem; }
-      .footer { padding:1.5rem 1rem 2.5rem; }
-    }
+    /* TRANSITIONS */
+    [data-i18n] { transition:opacity .18s ease; }
+    .lang-switching [data-i18n] { opacity:0; }
 
-    /* ══ FADE-IN ANIMATION ══ */
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(18px); }
       to   { opacity:1; transform:translateY(0); }
@@ -226,6 +226,14 @@
     .fade-up:nth-child(4){ animation-delay:.26s }
     .fade-up:nth-child(5){ animation-delay:.33s }
     .fade-up:nth-child(6){ animation-delay:.40s }
+
+    @media(max-width:600px){
+      .nav { padding:0 1rem; gap:6px; }
+      .hero { padding:2.5rem 1rem 2rem; }
+      .page { padding:0 1rem 4rem; }
+      .footer { padding:1.5rem 1rem 2.5rem; }
+      .nav-links { display:none; }
+    }
   </style>
 </head>
 <body>
@@ -233,140 +241,198 @@
 <!-- NAV -->
 <nav class="nav">
   <a href="index.html" class="nav-brand">
-    <span class="icon">📓</span> Lucilia's Notebook
+    <span>📓</span> Lucilia's Notebook
   </a>
   <div class="nav-links">
-    <a href="index.html" class="nav-link active">Home</a>
+    <a href="index.html" class="nav-link active" data-i18n="nav_home">Home</a>
     <span class="nav-sep"></span>
-    <a href="index.html#python" class="nav-link">Python</a>
+    <a href="index.html#python"     class="nav-link">Python</a>
     <a href="index.html#javascript" class="nav-link">JavaScript</a>
-    <a href="index.html#git" class="nav-link">Git</a>
-    <a href="index.html#banco" class="nav-link">Banco de Dados</a>
-    <a href="index.html#english" class="nav-link">English</a>
+    <a href="index.html#git"        class="nav-link">Git</a>
+    <a href="index.html#banco"      class="nav-link" data-i18n="nav_db">Banco de Dados</a>
+    <a href="index.html#english"    class="nav-link">English</a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">🇧🇷 PT</button>
+    <button class="lang-btn"        id="btn-en" onclick="setLang('en')">🇺🇸 EN</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
-  <p class="hero-eyebrow fade-up">// developer notes</p>
+  <p class="hero-eyebrow fade-up" data-i18n="eyebrow">// developer notes</p>
   <h1 class="hero-title fade-up">
     Lucilia's<br><em>Notebook</em>
   </h1>
-  <p class="hero-sub fade-up">
+  <p class="hero-sub fade-up" data-i18n="hero_sub">
     Anotações de aula organizadas por assunto. Tudo que aprendi, do jeito que entendi — baseado nos cursos online.
   </p>
   <div class="hero-meta fade-up">
-    <span>📍 Curso em Vídeo</span>
+    <span data-i18n="meta_local">📍 Aprendizado Online</span>
     <span class="dot"></span>
-    <span>✏️ Em andamento</span>
+    <span data-i18n="meta_status">✏️ Em andamento</span>
     <span class="dot"></span>
-    <span>Python · JS · Git · DB· English</span>
+    <span>Python · JS · Git · DB · English</span>
   </div>
 </header>
 
 <!-- MAIN -->
 <main class="page">
 
+  <!-- PINNED NOTE -->
   <div class="pinned fade-up">
     <span class="pinned-icon">📌</span>
     <div>
-      <h4>Nota da Lucilia</h4>
-      <p>Esse caderno é o meu jeito de revisar e fixar o conteúdo. Clique em qualquer matéria para ver os tópicos e acessar as aulas anotadas.</p>
+      <h4 data-i18n="pinned_title">Nota da Lucilia</h4>
+      <p data-i18n="pinned_text">Esse caderno é o meu jeito de revisar e fixar o conteúdo. Clique em qualquer matéria para ver os tópicos e acessar as aulas anotadas.</p>
     </div>
   </div>
+
+  <!-- PROFILE LINKS -->
+  <a href="sobre-mim/sobre-mim.html" class="profile-btn fade-up">
+    <div class="pb-left"><div class="pb-avatar">L</div></div>
+    <div class="pb-center">
+      <p class="pb-name">Lucilia Rosa</p>
+      <p class="pb-role" data-i18n="profile_role">Fullstack &amp; Automation Developer · São Paulo</p>
+    </div>
+    <div class="pb-right" data-i18n="profile_link">Ver perfil →</div>
+  </a>
+
+  <a href="sobre-mim/projetos.html" class="profile-btn fade-up">
+    <div class="pb-left"><div class="pb-avatar">🚀</div></div>
+    <div class="pb-center">
+      <p class="pb-name" data-i18n="projects_name">Projetos</p>
+      <p class="pb-role" data-i18n="projects_role">Meu Portfólio de Projetos</p>
+    </div>
+    <div class="pb-right" data-i18n="projects_link">Ver projetos →</div>
+  </a>
 
   <!-- PYTHON -->
   <section id="python" style="margin-bottom:2.5rem">
     <p class="sec-label">🐍 Python</p>
     <div class="subjects">
-              
-      <div class="subject-card fade-up" id="card-fundamentos">
-        <div class="sc-header">
-          <span class="sc-icon">🔢</span>
-          <span class="sc-arrow">→</span>
-        </div>
+
+      <div class="subject-card fade-up" id="card-sobre">
+        <div class="sc-header"><span class="sc-icon">🐍</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
-          <p class="sc-name">Fundamentos</p>
-          <p class="sc-desc">Variáveis, operadores, condicionais, laços e funções em Python.</p>
+          <p class="sc-name" data-i18n="py1_name">Sobre o Python</p>
+          <p class="sc-desc" data-i18n="py1_desc">A história da linguagem, quem criou, como evoluiu, documentação oficial e o Zen do Python.</p>
         </div>
         <div class="sc-footer">
           <span class="sc-tag py">Python</span>
-          <button class="sc-toggle-btn" onclick="toggleCard('card-fundamentos', this)">▼ ver aulas</button>
-          <span class="sc-count">5 aulas</span>
+          <button class="sc-toggle-btn" onclick="toggleCard('card-sobre',this)" data-i18n="btn_see">▼ ver aulas</button>
+          <span class="sc-count">2 <span data-i18n="lessons_word">aulas</span></span>
+        </div>
+        <div class="lessons-panel">
+          <a href="python/historia-python/py-historia.html" class="lesson-link">
+            <span class="ll-num">01</span>
+            <span data-i18n="py1_l1">História do Python — origem e criação</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="python/historia-python/py-ecossistema.html" class="lesson-link">
+            <span class="ll-num">02</span>
+            <span data-i18n="py1_l2">Ecossistema, docs oficiais e Zen do Python</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="subject-card fade-up" id="card-fundamentos">
+        <div class="sc-header"><span class="sc-icon">🔢</span><span class="sc-arrow">→</span></div>
+        <div class="sc-body">
+          <p class="sc-name" data-i18n="py2_name">Fundamentos</p>
+          <p class="sc-desc" data-i18n="py2_desc">Variáveis, operadores, condicionais, laços e funções em Python.</p>
+        </div>
+        <div class="sc-footer">
+          <span class="sc-tag py">Python</span>
+          <button class="sc-toggle-btn" onclick="toggleCard('card-fundamentos',this)" data-i18n="btn_see">▼ ver aulas</button>
+          <span class="sc-count">5 <span data-i18n="lessons_word">aulas</span></span>
         </div>
         <div class="lessons-panel">
           <a href="python/fundamentos/py-variaveis.html" class="lesson-link">
             <span class="ll-num">01</span>
-            Variáveis e Tipos Primitivos
-            <span class="ll-badge done">feita</span>
+            <span data-i18n="py2_l1">Variáveis e Tipos Primitivos</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
           </a>
           <a href="python/fundamentos/py-operadores.html" class="lesson-link">
             <span class="ll-num">02</span>
-            Operadores (aritméticos, relacionais, lógicos)
-            <span class="ll-badge done">feita</span>
+            <span data-i18n="py2_l2">Operadores (aritméticos, relacionais, lógicos)</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
           </a>
           <a href="python/fundamentos/py-condicionais.html" class="lesson-link">
             <span class="ll-num">03</span>
-            Estruturas Condicionais (if, elif, else)
-            <span class="ll-badge done">feita</span>
+            <span data-i18n="py2_l3">Estruturas Condicionais (if, elif, else)</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
           </a>
           <a href="python/fundamentos/py-lacos.html" class="lesson-link">
             <span class="ll-num">04</span>
-            Laços de Repetição (for e while)
-            <span class="ll-badge done">feita</span>
+            <span data-i18n="py2_l4">Laços de Repetição (for e while)</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
           </a>
           <a href="python/fundamentos/py-funcoes.html" class="lesson-link">
             <span class="ll-num">05</span>
-            Funções — definindo e reutilizando código
-            <span class="ll-badge done">feita</span>
+            <span data-i18n="py2_l5">Funções — definindo e reutilizando código</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
           </a>
         </div>
       </div>
 
       <div class="subject-card fade-up" id="card-estruturas">
-        <div class="sc-header">
-          <span class="sc-icon">📦</span>
-          <span class="sc-arrow">→</span>
-        </div>
+        <div class="sc-header"><span class="sc-icon">📦</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
-          <p class="sc-name">Estruturas de Dados</p>
-          <p class="sc-desc">Listas, tuplas, dicionários e conjuntos com Python.</p>
+          <p class="sc-name" data-i18n="py3_name">Estruturas de Dados</p>
+          <p class="sc-desc" data-i18n="py3_desc">Listas, tuplas, dicionários e conjuntos com Python.</p>
         </div>
         <div class="sc-footer">
           <span class="sc-tag py">Python</span>
-          <button class="sc-toggle-btn" onclick="toggleCard('card-estruturas', this)">▼ ver aulas</button>
-          <span class="sc-count">em breve</span>
+          <button class="sc-toggle-btn" onclick="toggleCard('card-estruturas',this)" data-i18n="btn_see">▼ ver aulas</button>
+          <span class="sc-count">4 <span data-i18n="lessons_word">aulas</span></span>
         </div>
         <div class="lessons-panel">
-          <span class="lesson-link" style="color:var(--ink4);cursor:default">
-            <span class="ll-num">—</span> Conteúdo em construção...
-          </span>
+          <a href="./python/estrutura-de-dados/py-listas.html" class="lesson-link">
+            <span class="ll-num">01</span>
+            <span data-i18n="py3_l1">Listas — índices, fatiamento e métodos</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="./python/estrutura-de-dados/py-tuplas.html" class="lesson-link">
+            <span class="ll-num">02</span>
+            <span data-i18n="py3_l2">Tuplas — imutabilidade e desempacotamento</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="./python/estrutura-de-dados/py-dicionarios.html" class="lesson-link">
+            <span class="ll-num">03</span>
+            <span data-i18n="py3_l3">Dicionários — chave, valor e métodos</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="./python/estrutura-de-dados/py-conjuntos.html" class="lesson-link">
+            <span class="ll-num">04</span>
+            <span data-i18n="py3_l4">Conjuntos — sets e operações matemáticas</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
         </div>
       </div>
-            <div class="subject-card open fade-up" id="card-poo">
-        <div class="sc-header">
-          <span class="sc-icon">🧱</span>
-          <span class="sc-arrow">→</span>
-        </div>
+
+      <div class="subject-card fade-up" id="card-poo">
+        <div class="sc-header"><span class="sc-icon">🧱</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
-          <p class="sc-name">Orientação a Objetos</p>
-          <p class="sc-desc">Classes, objetos, atributos, métodos, visibilidade e os 4 pilares da POO.</p>
+          <p class="sc-name" data-i18n="py4_name">Orientação a Objetos</p>
+          <p class="sc-desc" data-i18n="py4_desc">Classes, objetos, atributos, métodos, visibilidade e os 4 pilares da POO.</p>
         </div>
         <div class="sc-footer">
           <span class="sc-tag py">Python</span>
-          <button class="sc-toggle-btn" onclick="toggleCard('card-poo', this)">▲ ocultar</button>
-          <span class="sc-count">2 aulas</span>
+          <button class="sc-toggle-btn" onclick="toggleCard('card-poo',this)" data-i18n="btn_see">▼ ver aulas</button>
+          <span class="sc-count">2 <span data-i18n="lessons_word">aulas</span></span>
         </div>
         <div class="lessons-panel">
           <a href="python/orientacao-a-objetos/historia-poo.html" class="lesson-link">
             <span class="ll-num">01</span>
-            História da POO — origem e criadores
-            <span class="ll-badge new">feita</span>
+            <span data-i18n="py4_l1">História da POO — origem e criadores</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
           </a>
           <a href="python/orientacao-a-objetos/poo-conceitos.html" class="lesson-link">
             <span class="ll-num">02</span>
-            Classes, Objetos, Atributos e Pilares
-            <span class="ll-badge done">nova</span>
+            <span data-i18n="py4_l2">Classes, Objetos, Atributos e Pilares</span>
+            <span class="ll-badge new" data-i18n="badge_new">nova</span>
           </a>
         </div>
       </div>
@@ -380,32 +446,26 @@
     <div class="subjects">
 
       <div class="subject-card fade-up" id="card-jsbasico">
-        <div class="sc-header">
-          <span class="sc-icon">🌐</span>
-          <span class="sc-arrow">→</span>
-        </div>
+        <div class="sc-header"><span class="sc-icon">🌐</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
-          <p class="sc-name">JS Básico</p>
-          <p class="sc-desc">DOM, eventos, variáveis e funções no browser.</p>
+          <p class="sc-name" data-i18n="js1_name">JS Básico</p>
+          <p class="sc-desc" data-i18n="js1_desc">DOM, eventos, variáveis e funções no browser.</p>
         </div>
         <div class="sc-footer">
           <span class="sc-tag js">JavaScript</span>
-          <span class="sc-count">em breve</span>
+          <span class="sc-count" data-i18n="coming_soon">em breve</span>
         </div>
       </div>
 
       <div class="subject-card fade-up" id="card-jsmodern">
-        <div class="sc-header">
-          <span class="sc-icon">🚀</span>
-          <span class="sc-arrow">→</span>
-        </div>
+        <div class="sc-header"><span class="sc-icon">🚀</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
-          <p class="sc-name">JS Moderno</p>
-          <p class="sc-desc">ES6+, arrow functions, promises, async/await.</p>
+          <p class="sc-name" data-i18n="js2_name">JS Moderno</p>
+          <p class="sc-desc" data-i18n="js2_desc">ES6+, arrow functions, promises, async/await.</p>
         </div>
         <div class="sc-footer">
           <span class="sc-tag js">JavaScript</span>
-          <span class="sc-count">em breve</span>
+          <span class="sc-count" data-i18n="coming_soon">em breve</span>
         </div>
       </div>
 
@@ -416,60 +476,81 @@
   <section id="git" style="margin-bottom:2.5rem">
     <p class="sec-label">🌿 Git &amp; GitHub</p>
     <div class="subjects">
+
       <div class="subject-card fade-up" id="card-git">
-        <div class="sc-header">
-          <span class="sc-icon">🌿</span>
-          <span class="sc-arrow">→</span>
-        </div>
+        <div class="sc-header"><span class="sc-icon">🌿</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
-          <p class="sc-name">Controle de Versão</p>
-          <p class="sc-desc">Commits, branches, merge, pull requests e GitHub.</p>
+          <p class="sc-name" data-i18n="git1_name">Controle de Versão</p>
+          <p class="sc-desc" data-i18n="git1_desc">Commits, branches, merge, pull requests e GitHub.</p>
         </div>
         <div class="sc-footer">
           <span class="sc-tag git">Git</span>
-          <span class="sc-count">em breve</span>
+          <button class="sc-toggle-btn" onclick="toggleCard('card-git',this)" data-i18n="btn_see">▼ ver aulas</button>
+          <span class="sc-count">5 <span data-i18n="lessons_word">aulas</span></span>
+        </div>
+        <div class="lessons-panel">
+          <a href="git/controle-de-versao/git-intro.html" class="lesson-link">
+            <span class="ll-num">01</span>
+            <span data-i18n="git1_l1">Introdução — controle de versão e as 3 áreas</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="git/controle-de-versao/git-commits.html" class="lesson-link">
+            <span class="ll-num">02</span>
+            <span data-i18n="git1_l2">Commits — staging, histórico e como desfazer</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="git/controle-de-versao/git-branches.html" class="lesson-link">
+            <span class="ll-num">03</span>
+            <span data-i18n="git1_l3">Branches — criando e navegando entre elas</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="git/controle-de-versao/git-merge.html" class="lesson-link">
+            <span class="ll-num">04</span>
+            <span data-i18n="git1_l4">Merge, Rebase e resolução de conflitos</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
+          <a href="git/controle-de-versao/git-github.html" class="lesson-link">
+            <span class="ll-num">05</span>
+            <span data-i18n="git1_l5">GitHub, push/pull e Pull Requests</span>
+            <span class="ll-badge done" data-i18n="badge_done">feita</span>
+          </a>
         </div>
       </div>
+
     </div>
   </section>
 
   <!-- BANCO DE DADOS -->
   <section id="banco" style="margin-bottom:2.5rem">
-    <p class="sec-label">🗄️ Banco de Dados</p>
+    <p class="sec-label" data-i18n="sec_db">🗄️ Banco de Dados</p>
     <div class="subjects">
       <div class="subject-card fade-up" id="card-sql">
-        <div class="sc-header">
-          <span class="sc-icon">🗄️</span>
-          <span class="sc-arrow">→</span>
-        </div>
+        <div class="sc-header"><span class="sc-icon">🗄️</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
           <p class="sc-name">SQL</p>
-          <p class="sc-desc">SELECT, INSERT, UPDATE, DELETE, JOINs e modelagem.</p>
+          <p class="sc-desc" data-i18n="db1_desc">SELECT, INSERT, UPDATE, DELETE, JOINs e modelagem.</p>
         </div>
         <div class="sc-footer">
           <span class="sc-tag db">SQL</span>
-          <span class="sc-count">em breve</span>
+          <span class="sc-count" data-i18n="coming_soon">em breve</span>
         </div>
       </div>
     </div>
   </section>
 
-    <!-- ENGLISH -->
+  <!-- ENGLISH -->
   <section id="english" style="margin-bottom:2.5rem">
     <p class="sec-label">🌍 English</p>
     <div class="subjects">
-      <div class="subject-card fade-up" id="card-sql">
-        <div class="sc-header">
-          <span class="sc-icon">🌍</span>
-          <span class="sc-arrow">→</span>
-        </div>
+      <div class="subject-card fade-up" id="card-english">
+        <div class="sc-header"><span class="sc-icon">🌍</span><span class="sc-arrow">→</span></div>
         <div class="sc-body">
           <p class="sc-name">English</p>
-          <p class="sc-desc">Grammar, Vocabulary, Reading, Writing.</p>
+          <p class="sc-desc" data-i18n="en1_desc">Grammar, Vocabulary, Reading, Writing.</p>
         </div>
         <div class="sc-footer">
-          <span class="sc-tag db">English</span>
-          <span class="sc-count">em breve</span>
+          <span class="sc-tag en">English</span>
+          <span class="sc-count" data-i18n="coming_soon">em breve</span>
         </div>
       </div>
     </div>
@@ -478,18 +559,168 @@
 </main>
 
 <footer class="footer">
-  <span>📓 Lucilia's Notebook — Developer</span>
-  <span>feito com ☕ e muita anotação</span>
+  <span>📓 © 2026 Lucilia Rosa. <span data-i18n="footer_rights">Todos os direitos reservados.</span></span>
+  <span data-i18n="footer_made">feito com ☕ e muita anotação</span>
 </footer>
 
 <script>
-  function toggleCard(id, btn) {
-    const card = document.getElementById(id);
-    const isOpen = card.classList.contains('open');
-    card.classList.toggle('open', !isOpen);
-    btn.textContent = isOpen ? '▼ ver aulas' : '▲ ocultar';
-    btn.style.color = isOpen ? '' : 'var(--accent)';
+/* ── i18n ── */
+const T = {
+  pt: {
+    nav_home:"Home", nav_db:"Banco de Dados",
+    eyebrow:"// developer notes",
+    hero_sub:"Anotações de aula organizadas por assunto. Tudo que aprendi, do jeito que entendi — baseado nos cursos online.",
+    meta_local:"📍 Aprendizado Online", meta_status:"✏️ Em andamento",
+    pinned_title:"Nota da Lucilia",
+    pinned_text:"Esse caderno é o meu jeito de revisar e fixar o conteúdo. Clique em qualquer matéria para ver os tópicos e acessar as aulas anotadas.",
+    profile_role:"Fullstack & Automation Developer · São Paulo",
+    profile_link:"Ver perfil →",
+    projects_name:"Projetos", projects_role:"Meu Portfólio de Projetos", projects_link:"Ver projetos →",
+    btn_see:"▼ ver aulas", btn_hide:"▲ ocultar",
+    lessons_word:"aulas", coming_soon:"em breve",
+    badge_done:"feita", badge_new:"nova",
+    sec_db:"🗄️ Banco de Dados",
+    /* Python */
+    py1_name:"Sobre o Python",
+    py1_desc:"A história da linguagem, quem criou, como evoluiu, documentação oficial e o Zen do Python.",
+    py1_l1:"História do Python — origem e criação",
+    py1_l2:"Ecossistema, docs oficiais e Zen do Python",
+    py2_name:"Fundamentos",
+    py2_desc:"Variáveis, operadores, condicionais, laços e funções em Python.",
+    py2_l1:"Variáveis e Tipos Primitivos",
+    py2_l2:"Operadores (aritméticos, relacionais, lógicos)",
+    py2_l3:"Estruturas Condicionais (if, elif, else)",
+    py2_l4:"Laços de Repetição (for e while)",
+    py2_l5:"Funções — definindo e reutilizando código",
+    py3_name:"Estruturas de Dados",
+    py3_desc:"Listas, tuplas, dicionários e conjuntos com Python.",
+    py3_l1:"Listas — índices, fatiamento e métodos",
+    py3_l2:"Tuplas — imutabilidade e desempacotamento",
+    py3_l3:"Dicionários — chave, valor e métodos",
+    py3_l4:"Conjuntos — sets e operações matemáticas",
+    py4_name:"Orientação a Objetos",
+    py4_desc:"Classes, objetos, atributos, métodos, visibilidade e os 4 pilares da POO.",
+    py4_l1:"História da POO — origem e criadores",
+    py4_l2:"Classes, Objetos, Atributos e Pilares",
+    /* JavaScript */
+    js1_name:"JS Básico",
+    js1_desc:"DOM, eventos, variáveis e funções no browser.",
+    js2_name:"JS Moderno",
+    js2_desc:"ES6+, arrow functions, promises, async/await.",
+    /* Git */
+    git1_name:"Controle de Versão",
+    git1_desc:"Commits, branches, merge, pull requests e GitHub.",
+    git1_l1:"Introdução — controle de versão e as 3 áreas",
+    git1_l2:"Commits — staging, histórico e como desfazer",
+    git1_l3:"Branches — criando e navegando entre elas",
+    git1_l4:"Merge, Rebase e resolução de conflitos",
+    git1_l5:"GitHub, push/pull e Pull Requests",
+    /* DB */
+    db1_desc:"SELECT, INSERT, UPDATE, DELETE, JOINs e modelagem.",
+    /* English */
+    en1_desc:"Grammar, Vocabulary, Reading, Writing.",
+    /* Footer */
+    footer_rights:"Todos os direitos reservados.",
+    footer_made:"feito com ☕ e muita anotação",
+  },
+  en: {
+    nav_home:"Home", nav_db:"Databases",
+    eyebrow:"// developer notes",
+    hero_sub:"Class notes organized by subject. Everything I learned, the way I understood it — based on online courses.",
+    meta_local:"📍 Online Learning", meta_status:"✏️ In progress",
+    pinned_title:"Lucilia's Note",
+    pinned_text:"This notebook is my way of reviewing and retaining knowledge. Click on any subject to see the topics and access the annotated lessons.",
+    profile_role:"Fullstack & Automation Developer · São Paulo",
+    profile_link:"View profile →",
+    projects_name:"Projects", projects_role:"My Project Portfolio", projects_link:"View projects →",
+    btn_see:"▼ see lessons", btn_hide:"▲ hide",
+    lessons_word:"lessons", coming_soon:"coming soon",
+    badge_done:"done", badge_new:"new",
+    sec_db:"🗄️ Databases",
+    /* Python */
+    py1_name:"About Python",
+    py1_desc:"The language history, who created it, how it evolved, official docs and the Zen of Python.",
+    py1_l1:"Python History — origin and creation",
+    py1_l2:"Ecosystem, official docs and Zen of Python",
+    py2_name:"Fundamentals",
+    py2_desc:"Variables, operators, conditionals, loops and functions in Python.",
+    py2_l1:"Variables and Primitive Types",
+    py2_l2:"Operators (arithmetic, relational, logical)",
+    py2_l3:"Conditional Statements (if, elif, else)",
+    py2_l4:"Loops (for and while)",
+    py2_l5:"Functions — defining and reusing code",
+    py3_name:"Data Structures",
+    py3_desc:"Lists, tuples, dictionaries and sets in Python.",
+    py3_l1:"Lists — indexes, slicing and methods",
+    py3_l2:"Tuples — immutability and unpacking",
+    py3_l3:"Dictionaries — key, value and methods",
+    py3_l4:"Sets — sets and mathematical operations",
+    py4_name:"Object-Oriented Programming",
+    py4_desc:"Classes, objects, attributes, methods, visibility and the 4 pillars of OOP.",
+    py4_l1:"OOP History — origin and creators",
+    py4_l2:"Classes, Objects, Attributes and Pillars",
+    /* JavaScript */
+    js1_name:"JS Basics",
+    js1_desc:"DOM, events, variables and functions in the browser.",
+    js2_name:"Modern JS",
+    js2_desc:"ES6+, arrow functions, promises, async/await.",
+    /* Git */
+    git1_name:"Version Control",
+    git1_desc:"Commits, branches, merge, pull requests and GitHub.",
+    git1_l1:"Introduction — version control and the 3 areas",
+    git1_l2:"Commits — staging, history and how to undo",
+    git1_l3:"Branches — creating and switching between them",
+    git1_l4:"Merge, Rebase and conflict resolution",
+    git1_l5:"GitHub, push/pull and Pull Requests",
+    /* DB */
+    db1_desc:"SELECT, INSERT, UPDATE, DELETE, JOINs and modeling.",
+    /* English */
+    en1_desc:"Grammar, Vocabulary, Reading, Writing.",
+    /* Footer */
+    footer_rights:"All rights reserved.",
+    footer_made:"made with ☕ and lots of notes",
   }
+};
+
+let lang = localStorage.getItem('nb_lang') || 'pt';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('nb_lang', l);
+  document.body.classList.add('lang-switching');
+  setTimeout(() => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = T[l][key];
+      if (val !== undefined) el.innerHTML = val;
+    });
+    // atualiza texto dos botões toggle abertos
+    document.querySelectorAll('.subject-card.open .sc-toggle-btn').forEach(btn => {
+      btn.textContent = T[l]['btn_hide'];
+    });
+    document.querySelectorAll('.subject-card:not(.open) .sc-toggle-btn').forEach(btn => {
+      btn.textContent = T[l]['btn_see'];
+    });
+    document.documentElement.lang = l === 'pt' ? 'pt-BR' : 'en';
+    document.title = l === 'pt'
+      ? "Lucilia's Notebook — Developer"
+      : "Lucilia's Notebook — Developer";
+    document.getElementById('btn-pt').classList.toggle('active', l === 'pt');
+    document.getElementById('btn-en').classList.toggle('active', l === 'en');
+    document.body.classList.remove('lang-switching');
+  }, 180);
+}
+
+if (lang === 'en') setLang('en');
+
+/* toggle card */
+function toggleCard(id, btn) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  card.classList.toggle('open', !isOpen);
+  btn.textContent = isOpen ? T[lang]['btn_see'] : T[lang]['btn_hide'];
+  btn.style.color  = isOpen ? '' : 'var(--accent)';
+}
 </script>
 </body>
 </html>
