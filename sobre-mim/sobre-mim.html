@@ -112,12 +112,14 @@
     .back-section{text-align:center;margin-top:3rem;}
     .back-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--ink);text-decoration:none;padding:12px 24px;border-radius:8px;border:1.5px solid var(--rule);background:#fff;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s;}
     .back-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+
     [data-i18n]{transition:opacity .18s ease;}
     .lang-switching [data-i18n]{opacity:0;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     .fade{animation:fadeUp .5s ease both;}
     .fade-d1{animation-delay:.08s}.fade-d2{animation-delay:.16s}.fade-d3{animation-delay:.24s}.fade-d4{animation-delay:.32s}
-        /* ── INTERCÂMBIO ── */
+
+x        /* ── INTERCÂMBIO ── */
     .exchange-card{background:linear-gradient(135deg,#dbeafe 0%,#dcfce7 100%);border:1.5px solid var(--rule);border-radius:var(--radius);padding:20px 22px;margin-bottom:1.5rem;}
     .exchange-card h3{font-family:var(--font-serif);font-size:18px;font-weight:600;color:var(--ink);margin-bottom:10px;}
     .exchange-card p{font-size:13.5px;color:var(--ink2);line-height:1.85;}
@@ -223,7 +225,7 @@
   <section style="margin-bottom:2rem" class="fade fade-d1">
     <p class="sec-title" data-i18n="sec_about">Quem sou eu</p>
     <div class="about-text">
-      <p data-i18n="about_p1">Sou <strong>Backend &amp; Automation Developer</strong> com mais de 5 anos de experiência em desenvolvimento de sistemas, automação e suporte técnico. Tenho uma trajetória que começou nas redes de computadores e foi evoluindo naturalmente para o desenvolvimento de software — sempre movida pela curiosidade e pela vontade de resolver problemas reais com tecnologia.</p>
+      <p data-i18n="about_p1">Sou <strong>Fullstack &amp; Automation Developer</strong> com mais de 5 anos de experiência em desenvolvimento de sistemas, automação e suporte técnico. Tenho uma trajetória que começou nas redes de computadores e foi evoluindo naturalmente para o desenvolvimento de software — sempre movida pela curiosidade e pela vontade de resolver problemas reais com tecnologia.</p>
       <p data-i18n="about_p2">Trabalho com <strong>Python, SQL e Microsoft Power Platform</strong> para construir automações, dashboards e soluções orientadas a dados. Tenho uma base sólida em frontend e uma visão full stack que me permite enxergar o projeto como um todo, do banco de dados à interface.</p>
       <p data-i18n="about_p3">Sou de <strong>São Paulo</strong>, tenho o sonho de morar no <strong>Canadá</strong> — onde já fiz intercâmbio — e acredito que tecnologia é muito mais do que código: é <em>autonomia, liberdade e possibilidade</em>.</p>
     </div>
@@ -445,7 +447,7 @@ const T = {
     hero_role:"Backend & Automation Developer · São Paulo, Brasil",
     tag_exp:"+5 anos de experiência",tag_wit:"Mulher na Tech",tag_canada:"Open to Canada",
     sec_about:"Quem sou eu",
-    about_p1:"Sou <strong>Backend & Automation Developer</strong> com mais de 5 anos de experiência em desenvolvimento de sistemas, automação e suporte técnico. Tenho uma trajetória que começou nas redes de computadores e foi evoluindo naturalmente para o desenvolvimento de software — sempre movida pela curiosidade e pela vontade de resolver problemas reais com tecnologia.",
+    about_p1:"Sou <strong>Fullstack & Automation Developer</strong> com mais de 5 anos de experiência em desenvolvimento de sistemas, automação e suporte técnico. Tenho uma trajetória que começou nas redes de computadores e foi evoluindo naturalmente para o desenvolvimento de software — sempre movida pela curiosidade e pela vontade de resolver problemas reais com tecnologia.",
     about_p2:"Trabalho com <strong>Python, SQL e Microsoft Power Platform</strong> para construir automações, dashboards e soluções orientadas a dados. Tenho uma base sólida em frontend e uma visão full stack que me permite enxergar o projeto como um todo, do banco de dados à interface.",
     about_p3:"Sou de <strong>São Paulo</strong>, tenho o sonho de morar no <strong>Canadá</strong> — onde já fiz intercâmbio — e acredito que tecnologia é muito mais do que código: é <em>autonomia, liberdade e possibilidade</em>.",
     sec_wit:"Mulher na tecnologia",wit_title:"💜 Para as que ainda estão chegando",
@@ -482,14 +484,15 @@ const T = {
     exc_p3:"Durante esse mês, explorei lugares incríveis: <strong>Whistler</strong>, com suas montanhas de tirar o fôlego, o animado <strong>Lonsdale Quay</strong>, o lindo <strong>Stanley Park</strong> à beira-mar, e o tranquilo <strong>Joffre Lakes</strong> com seus lagos de um azul impossível. Cada lugar ficou guardado na memória e no coração.",
     exc_gallery_title:"Memórias em fotos",
     gal_add:"adicionar foto",
-    back_btn:"📓 Voltar para o Notebook"
+    back_btn:"📓 Voltar para o Notebook",
+
   },
   en: {
     nav_back:"← Back",nav_profile:"Profile &amp; Projects ▾",nav_home:"Home",nav_this:"About Me",nav_dd_about:"About me",nav_dd_about_desc:"Background, skills and story",nav_dd_projects:"Projects",nav_dd_projects_desc:"HTML, Python, JavaScript and React",nav_dd_areas:"Frontend, Backend &amp; Fullstack",nav_dd_areas_desc:"What each area is and how they connect",photo_hint:"your photo\nhere",eyebrow:"// about me",
     hero_role:"Backend & Automation Developer · São Paulo, Brazil",
     tag_exp:"+5 years of experience",tag_wit:"Woman in Tech",tag_canada:"Open to Canada",
     sec_about:"Who I am",
-    about_p1:"I'm a <strong>Backend & Automation Developer</strong> with over 5 years of experience in systems development, automation, and technical support. My journey started in computer networks and naturally evolved into software development — always driven by curiosity and the desire to solve real-world problems with technology.",
+    about_p1:"I'm a <strong>Fullstack & Automation Developer</strong> with over 5 years of experience in systems development, automation, and technical support. My journey started in computer networks and naturally evolved into software development — always driven by curiosity and the desire to solve real-world problems with technology.",
     about_p2:"I work with <strong>Python, SQL and Microsoft Power Platform</strong> to build automations, dashboards and data-driven solutions. I have a solid frontend foundation and a full stack mindset that allows me to see the whole picture, from database to interface.",
     about_p3:"I'm from <strong>São Paulo</strong>, dream of living in <strong>Canada</strong> — where I've already done an exchange program — and I believe technology is much more than code: it's <em>autonomy, freedom and possibility</em>.",
     sec_wit:"Woman in technology",wit_title:"💜 For those still on their way",
@@ -526,7 +529,7 @@ const T = {
     exc_p3:"During that month, I explored incredible places: <strong>Whistler</strong>, with its breathtaking mountains, the lively <strong>Lonsdale Quay</strong>, the beautiful waterfront <strong>Stanley Park</strong>, and the serene <strong>Joffre Lakes</strong> with their impossibly blue waters. Each place is forever kept in memory and in my heart.",
     exc_gallery_title:"Memories in photos",
     gal_add:"add photo",
-    back_btn:"📓 Back to the Notebook"
+    back_btn:"📓 Back to the Notebook",
   }
 };
 
