@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Sobre Mim — Lucilia Rosa</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📓</text></svg>"/>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📓</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     :root{--paper:#faf7f2;--paper2:#f3efe8;--paper3:#ede8df;--ink:#1c1917;--ink2:#44403c;--ink3:#78716c;--ink4:#a8a29e;--rule:rgba(28,25,23,.10);--rule2:rgba(28,25,23,.06);--accent:#c84b31;--accent2:#2563a8;--accent3:#1a7a50;--rose:#be185d;--rose-light:#fce7f3;--rose-mid:#f9a8d4;--shadow:0 2px 12px rgba(28,25,23,.08);--shadow-lg:0 8px 32px rgba(28,25,23,.13);--radius:10px;--font-body:'Nunito',sans-serif;--font-serif:'Lora',serif;--font-mono:'JetBrains Mono',monospace;}
     html{scroll-behavior:smooth;}
     body{font-family:var(--font-body);background:var(--paper);color:var(--ink);min-height:100vh;background-image:repeating-linear-gradient(transparent,transparent 31px,rgba(28,25,23,.045) 31px,rgba(28,25,23,.045) 32px);background-attachment:fixed;}
-    .nav{position:sticky;top:0;z-index:100;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--rule);padding:0 2rem;display:flex;align-items:center;height:56px;gap:10px;overflow:visible;}
+    .nav{position:sticky;top:0;left:0;z-index:100;width:100%;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--rule);padding:0 2rem;display:flex;align-items:center;height:56px;gap:10px;overflow:visible;}
     .nav-brand{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;white-space:nowrap;}
     .nav-links{display:flex;align-items:center;gap:4px;flex:1;overflow:visible;}
     .nav-back{font-size:13px;font-weight:600;color:var(--ink3);text-decoration:none;padding:6px 14px;border-radius:6px;border:1.5px solid var(--rule);transition:background .15s,color .15s;white-space:nowrap;}
@@ -174,6 +174,38 @@
     .exp-proj-card .epc-techs{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
     .exp-proj-card .epc-chip{font-family:var(--font-mono);font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;background:#fff;color:var(--ink3);border:1px solid var(--rule);}
     @media(max-width:600px){.exp-proj-grid{grid-template-columns:1fr;}}
+
+    /* ── CONTADORES ── */
+    .counters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:2rem;}
+    .counter-card{background:#fff;border:1.5px solid var(--rule);border-radius:var(--radius);padding:16px 20px;flex:1;min-width:110px;text-align:center;box-shadow:var(--shadow);}
+    .counter-num{font-family:var(--font-serif);font-size:30px;font-weight:600;line-height:1;color:var(--accent2);}
+    .counter-label{font-size:10px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.05em;margin-top:4px;}
+
+    /* ── TIMELINE ── */
+    .timeline{position:relative;padding-left:28px;margin-bottom:2rem;}
+    .timeline::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--accent2),var(--rose),var(--accent3));}
+    .tl-item{position:relative;margin-bottom:28px;}
+    .tl-item:last-child{margin-bottom:0;}
+    .tl-dot{position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid #fff;}
+    .tl-dot-blue{background:var(--accent2);box-shadow:0 0 0 2px #93c5fd;}
+    .tl-dot-rose{background:var(--rose);box-shadow:0 0 0 2px var(--rose-mid);}
+    .tl-dot-green{background:var(--accent3);box-shadow:0 0 0 2px #86efac;}
+    .tl-dot-amber{background:#d97706;box-shadow:0 0 0 2px #fde047;}
+    .tl-period{font-family:var(--font-mono);font-size:10px;color:var(--ink4);margin-bottom:3px;}
+    .tl-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+    .tl-sub{font-size:12.5px;color:var(--accent2);font-weight:600;margin-bottom:4px;}
+    .tl-desc{font-size:12px;color:var(--ink3);line-height:1.6;}
+
+    /* ── BOTÕES CV ── */
+    .cv-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+    .cv-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#fff;background:var(--ink);padding:9px 18px;border-radius:8px;border:none;cursor:pointer;transition:opacity .15s;font-family:var(--font-body);box-shadow:var(--shadow);}
+    .cv-btn:hover{opacity:.85;}
+    .cv-btn-en{background:linear-gradient(135deg,#1e40af,var(--accent2));}
+
+    /* ── VOLTAR AO TOPO ── */
+    .back-to-top{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:90;transform:translateY(8px);}
+    .back-to-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+    .back-to-top:hover{background:var(--ink2);}
   </style>
 </head>
 <body>
@@ -250,6 +282,36 @@
     </div>
   </div>
 
+  <!-- CONTADORES -->
+  <div class="counters fade">
+    <div class="counter-card">
+      <div class="counter-num" id="cnt-years">0</div>
+      <div class="counter-label" data-i18n="cnt_years">anos de experiência</div>
+    </div>
+    <div class="counter-card">
+      <div class="counter-num" id="cnt-companies">0</div>
+      <div class="counter-label" data-i18n="cnt_companies">empresas</div>
+    </div>
+    <div class="counter-card">
+      <div class="counter-num" id="cnt-edu">0</div>
+      <div class="counter-label" data-i18n="cnt_edu">formações</div>
+    </div>
+    <div class="counter-card">
+      <div class="counter-num" id="cnt-skills">0</div>
+      <div class="counter-label" data-i18n="cnt_skills">tecnologias</div>
+    </div>
+  </div>
+
+  <!-- BOTÕES CV -->
+  <div class="cv-btns fade">
+    <button class="cv-btn" onclick="downloadCV('pt')">
+      📄 <span data-i18n="btn_cv_pt">Baixar Currículo (PT)</span>
+    </button>
+    <button class="cv-btn cv-btn-en" onclick="downloadCV('en')">
+      📄 <span data-i18n="btn_cv_en">Download Resume (EN)</span>
+    </button>
+  </div>
+
   <hr/>
 
   <section style="margin-bottom:2rem" class="fade fade-d1">
@@ -324,6 +386,47 @@
           <p class="fam-desc" data-i18n="fam_luke">O mais carinhoso. May the force be with you — e com o Luke, a força da fofura é imbatível. 🐶</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <hr/>
+
+  <section style="margin-bottom:2rem" class="fade fade-d3">
+    <p class="sec-title" data-i18n="sec_timeline">Trajetória</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-blue"></div>
+        <p class="tl-period">Jul 2025 – <span data-i18n="tl_present">Presente</span></p>
+        <p class="tl-title">Systems Developer</p>
+        <p class="tl-sub">SENAI Brás</p>
+        <p class="tl-desc" data-i18n="tl1_desc">Python, Power BI, Power Automate — automações e dashboards para dados educacionais.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-rose"></div>
+        <p class="tl-period">Mar 2022 – Jul 2025</p>
+        <p class="tl-title">Application Support Analyst</p>
+        <p class="tl-sub">Vertem</p>
+        <p class="tl-desc" data-i18n="tl2_desc">Suporte a plataformas, ajustes de frontend, SQL, documentação técnica e treinamentos.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-green"></div>
+        <p class="tl-period">Abr 2018 – Mar 2022</p>
+        <p class="tl-title">Computer Network Technician</p>
+        <p class="tl-sub">Telium Networks</p>
+        <p class="tl-desc" data-i18n="tl3_desc">NOC, monitoramento de infraestrutura, suporte técnico a clientes e operadores em campo.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-amber"></div>
+        <p class="tl-period">Jul 2012 – Jul 2014</p>
+        <p class="tl-title" data-i18n="tl4_title">Técnico em Redes — SENAI Jandira</p>
+        <p class="tl-sub" data-i18n="tl4_sub">Início da jornada em tecnologia</p>
+        <p class="tl-desc" data-i18n="tl4_desc">Cabeamento, roteadores, switches, fibra óptica — onde tudo começou.</p>
+      </div>
+
     </div>
   </section>
 
@@ -596,22 +699,22 @@
     <p class="sec-title" style="margin-top:1.5rem" data-i18n="exc_gallery_title">Memórias em fotos</p>
     <div class="gallery-grid" id="galleryGrid">
       <div class="gal-slot" onclick="openLightbox(0)">
-        <img src="../img/inter1.jpg" alt="Vancouver"/>
+        <img src="../img/vancouver1.jpg" alt="Vancouver"/>
       </div>
       <div class="gal-slot" onclick="openLightbox(1)">
-        <img src="../img/inter2.jpg" alt="Vancouver"/>
+        <img src="../img/vancouver2.jpg" alt="Vancouver"/>
       </div>
       <div class="gal-slot" onclick="openLightbox(2)">
-        <img src="../img/inter3.jpg" alt="Vancouver"/>
+        <img src="../img/vancouver3.jpg" alt="Vancouver"/>
       </div>
       <div class="gal-slot" onclick="openLightbox(3)">
-        <img src="../img/inter4.jpg" alt="Vancouver"/>
+        <img src="../img/vancouver4.jpg" alt="Vancouver"/>
       </div>
       <div class="gal-slot" onclick="openLightbox(4)">
-        <img src="../img/inter5.jpg" alt="Vancouver"/>
+        <img src="../img/vancouver5.jpg" alt="Vancouver"/>
       </div>
       <div class="gal-slot" onclick="openLightbox(5)">
-        <img src="../img/inter6.jpg" alt="Vancouver"/>
+        <img src="../img/vancouver6.jpg" alt="Vancouver"/>
       </div>
     </div>
   </section>
@@ -639,10 +742,20 @@
   </div>
 </div>
 
+<!-- VOLTAR AO TOPO -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>
+
 <script>
 const T = {
   pt: {
     nav_back:"← Voltar",nav_profile:"Perfil &amp; Projetos ▾",nav_home:"Home",nav_this:"Sobre Mim",nav_dd_about:"Sobre mim",nav_dd_about_desc:"Trajetória, habilidades e história",nav_dd_projects:"Projetos",nav_dd_projects_desc:"HTML, Python, JavaScript e React",nav_dd_areas:"Frontend, Backend &amp; Fullstack",nav_dd_areas_desc:"O que é cada área e como se conectam",photo_hint:"sua foto\naqui",eyebrow:"// sobre mim",
+    cnt_years:"anos de experiência",cnt_companies:"empresas",cnt_edu:"formações",cnt_skills:"tecnologias",
+    btn_cv_pt:"Baixar Currículo (PT)",btn_cv_en:"Download Resume (EN)",
+    sec_timeline:"Trajetória",tl_present:"Presente",
+    tl1_desc:"Python, Power BI, Power Automate — automações e dashboards para dados educacionais.",
+    tl2_desc:"Suporte a plataformas, ajustes de frontend, SQL, documentação técnica e treinamentos.",
+    tl3_desc:"NOC, monitoramento de infraestrutura, suporte técnico a clientes e operadores em campo.",
+    tl4_title:"Técnico em Redes — SENAI Jandira",tl4_sub:"Início da jornada em tecnologia",tl4_desc:"Cabeamento, roteadores, switches, fibra óptica — onde tudo começou.",
     hero_role:"Backend & Automation Developer · São Paulo, Brasil",
     tag_exp:"+5 anos de experiência",tag_wit:"Mulher na Tech",tag_canada:"Open to Canada",
     sec_about:"Quem sou eu",
@@ -700,6 +813,13 @@ const T = {
   },
   en: {
     nav_back:"← Back",nav_profile:"Profile &amp; Projects ▾",nav_home:"Home",nav_this:"About Me",nav_dd_about:"About me",nav_dd_about_desc:"Background, skills and story",nav_dd_projects:"Projects",nav_dd_projects_desc:"HTML, Python, JavaScript and React",nav_dd_areas:"Frontend, Backend &amp; Fullstack",nav_dd_areas_desc:"What each area is and how they connect",photo_hint:"your photo\nhere",eyebrow:"// about me",
+    cnt_years:"years of experience",cnt_companies:"companies",cnt_edu:"degrees",cnt_skills:"technologies",
+    btn_cv_pt:"Download Currículo (PT)",btn_cv_en:"Download Resume (EN)",
+    sec_timeline:"Career timeline",tl_present:"Present",
+    tl1_desc:"Python, Power BI, Power Automate — automations and dashboards for educational data.",
+    tl2_desc:"Platform support, frontend fixes, SQL, technical documentation and training.",
+    tl3_desc:"NOC, infrastructure monitoring, technical support for clients and field operators.",
+    tl4_title:"Computer Networks Technician — SENAI Jandira",tl4_sub:"Where the tech journey began",tl4_desc:"Cabling, routers, switches, fiber optics — where it all started.",
     hero_role:"Backend & Automation Developer · São Paulo, Brazil",
     tag_exp:"+5 years of experience",tag_wit:"Woman in Tech",tag_canada:"Open to Canada",
     sec_about:"Who I am",
@@ -825,6 +945,165 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNav(1, null);
   if (e.key === 'ArrowLeft')  lbNav(-1, null);
   if (e.key === 'Escape')     document.getElementById('lightbox').classList.remove('open');
+});
+
+// ── CONTADORES ANIMADOS ──
+function animateCounter(id, target, suffix='') {
+  const el = document.getElementById(id);
+  let current = 0;
+  const step = Math.ceil(target / 40);
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = current + suffix;
+    if (current >= target) clearInterval(timer);
+  }, 35);
+}
+function startCounters() {
+  animateCounter('cnt-years', 5, '+');
+  animateCounter('cnt-companies', 3);
+  animateCounter('cnt-edu', 4);
+  animateCounter('cnt-skills', 15, '+');
+}
+const countersEl = document.querySelector('.counters');
+if (countersEl) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { startCounters(); observer.disconnect(); }
+    });
+  }, {threshold: 0.1});
+  observer.observe(countersEl);
+  // dispara imediatamente se já estiver visível na tela
+  const rect = countersEl.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0) startCounters();
+}
+
+// ── GERADOR DE CV ──
+function downloadCV(lang) {
+  const isPT = lang === 'pt';
+  const html = isPT ? generateCVPT() : generateCVEN();
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = isPT ? 'curriculo-lucilia-rosa-pt.html' : 'resume-lucilia-rosa-en.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function generateCVPT() {
+  var s = [];
+  s.push('<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/>');
+  s.push('<title>Curriculo Lucilia Rosa</title>');
+  s.push('<style>');
+  s.push('*{box-sizing:border-box;margin:0;padding:0;}');
+  s.push('body{font-family:Arial,sans-serif;color:#1c1917;background:#fff;max-width:800px;margin:0 auto;padding:2rem;}');
+  s.push('h1{font-size:26px;font-weight:700;margin-bottom:4px;}');
+  s.push('.subtitle{font-size:14px;color:#78716c;margin-bottom:12px;}');
+  s.push('.contacts{font-size:12px;color:#44403c;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;border-bottom:2px solid #1c1917;padding-bottom:12px;}');
+  s.push('h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid #e7e5e4;padding-bottom:4px;margin:18px 0 10px;}');
+  s.push('.exp-block{margin-bottom:14px;}');
+  s.push('.exp-header{display:flex;justify-content:space-between;align-items:flex-start;}');
+  s.push('.exp-role{font-size:13.5px;font-weight:700;}');
+  s.push('.exp-co{font-size:12.5px;color:#2563a8;font-weight:600;}');
+  s.push('.exp-period{font-size:11px;color:#78716c;white-space:nowrap;}');
+  s.push('ul{list-style:disc;padding-left:18px;margin-top:6px;}');
+  s.push('li{font-size:12px;color:#44403c;line-height:1.6;margin-bottom:2px;}');
+  s.push('.skills-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}');
+  s.push('.skill{font-size:11px;background:#f3efe8;color:#44403c;padding:2px 8px;border-radius:4px;}');
+  s.push('.edu-row{display:flex;justify-content:space-between;margin-bottom:8px;}');
+  s.push('.edu-deg{font-size:13px;font-weight:700;}');
+  s.push('.edu-inst{font-size:12px;color:#2563a8;}');
+  s.push('.edu-per{font-size:11px;color:#78716c;}');
+  s.push('@media print{body{padding:1rem;}}');
+  s.push('</sty'+'le></head><body>');
+  s.push('<h1>Lucilia Rosa</h1>');
+  s.push('<p class="subtitle">Fullstack &amp; Automation Developer &middot; São Paulo, Brasil</p>');
+  s.push('<div class="contacts"><span>lucilia.passos.rosa@outlook.com</span><span>linkedin.com/in/lucilia-rosa</span><span>github.com/luciliarosa</span><span>São Paulo, SP &mdash; Brasil</span></div>');
+  s.push('<h2>Resumo</h2>');
+  s.push('<p style="font-size:12.5px;color:#44403c;line-height:1.7;">Desenvolvedora Fullstack &amp; Automation com mais de 7 anos de experiência em desenvolvimento de sistemas, automação e suporte técnico. Especialista em Python, SQL e Microsoft Power Platform. Trajetória que evoluiu de redes de computadores para desenvolvimento de software full stack.</p>');
+  s.push('<h2>Experiência Profissional</h2>');
+  s.push('<div class="exp-block"><div class="exp-header"><div><p class="exp-role">Systems Developer</p><p class="exp-co">SENAI Brás &mdash; Full-time</p></div><p class="exp-period">Jul 2025 &ndash; Presente</p></div>');
+  s.push('<ul><li>Automação Python que lê Excel, envia para IA analisar e encaminha por e-mail &mdash; reduziu 1 dia de trabalho para menos de 1 hora</li><li>Automação web com Playwright para download automático de pesquisas de satisfação para o Power BI</li><li>Desenvolvimento e manutenção de dashboards com Power BI</li><li>Criação de workflows com Power Automate</li><li>Modelagem e manipulação de dados com SQL</li></ul>');
+  s.push('<div class="skills-row"><span class="skill">Python</span><span class="skill">SQL</span><span class="skill">Power BI</span><span class="skill">Power Automate</span><span class="skill">Playwright</span></div></div>');
+  s.push('<div class="exp-block"><div class="exp-header"><div><p class="exp-role">Application Support Analyst</p><p class="exp-co">Vertem &mdash; Full-time</p></div><p class="exp-period">Mar 2022 &ndash; Jul 2025</p></div>');
+  s.push('<ul><li>Análise e resolução de problemas em plataforma de troca de pontos por produtos e serviços</li><li>Scripts Python para automação de relatórios diários e semanais</li><li>Ajustes de frontend com HTML, CSS e JavaScript</li><li>Documentação técnica e treinamentos para novos colaboradores e outros setores</li><li>Participação em salas de crise para resolução de incidentes críticos</li></ul>');
+  s.push('<div class="skills-row"><span class="skill">SQL</span><span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span><span class="skill">Python</span></div></div>');
+  s.push('<div class="exp-block"><div class="exp-header"><div><p class="exp-role">Computer Network Technician</p><p class="exp-co">Telium Networks &mdash; Full-time</p></div><p class="exp-period">Abr 2018 &ndash; Mar 2022</p></div>');
+  s.push('<ul><li>Atuação no NOC com monitoramento de rádios wireless, backbones e telefonia</li><li>Suporte remoto a técnicos em campo para identificação de rompimentos de fibra ótica</li><li>Suporte técnico a clientes de internet dedicada</li><li>Projeto de mapeamento de infraestrutura para padronização ENEL</li></ul>');
+  s.push('<div class="skills-row"><span class="skill">TCP/IP</span><span class="skill">Cisco</span><span class="skill">MikroTik</span><span class="skill">Fibra Óptica</span><span class="skill">NOC</span></div></div>');
+  s.push('<h2>Habilidades Técnicas</h2>');
+  s.push('<div class="skills-row"><span class="skill">Python</span><span class="skill">JavaScript</span><span class="skill">React</span><span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">SQL Server</span><span class="skill">MySQL</span><span class="skill">Power BI</span><span class="skill">Power Automate</span><span class="skill">Power Apps</span><span class="skill">Git</span><span class="skill">GitHub</span><span class="skill">APIs REST</span><span class="skill">Playwright</span><span class="skill">Postman</span></div>');
+  s.push('<h2>Formação Acadêmica</h2>');
+  s.push('<div class="edu-row"><div><p class="edu-deg">Pós-Graduação &mdash; Desenvolvimento Full Stack</p><p class="edu-inst">Descomplica</p></div><p class="edu-per">Mai 2023 &ndash; Out 2024</p></div>');
+  s.push('<div class="edu-row"><div><p class="edu-deg">Bacharelado em Análise e Desenvolvimento de Sistemas</p><p class="edu-inst">FATEC Carapicuíba</p></div><p class="edu-per">Fev 2022 &ndash; Dez 2024</p></div>');
+  s.push('<div class="edu-row"><div><p class="edu-deg">Bacharelado em Gestão da Tecnologia da Informação</p><p class="edu-inst">FATEC Barueri</p></div><p class="edu-per">Fev 2015 &ndash; Dez 2017</p></div>');
+  s.push('<div class="edu-row"><div><p class="edu-deg">Técnico em Redes de Computadores</p><p class="edu-inst">SENAI Jandira</p></div><p class="edu-per">Jul 2012 &ndash; Jul 2014</p></div>');
+  s.push('<h2>Idiomas</h2>');
+  s.push('<div class="skills-row"><span class="skill">Português &mdash; Nativo</span><span class="skill">Inglês &mdash; Intermediário B2</span></div>');
+  s.push('</bo'+'dy></html>');
+  return s.join('\n');
+}
+
+function generateCVEN() {
+  var s = [];
+  s.push('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>');
+  s.push('<title>Resume Lucilia Rosa</title>');
+  s.push('<style>');
+  s.push('*{box-sizing:border-box;margin:0;padding:0;}');
+  s.push('body{font-family:Arial,sans-serif;color:#1c1917;background:#fff;max-width:800px;margin:0 auto;padding:2rem;}');
+  s.push('h1{font-size:26px;font-weight:700;margin-bottom:2px;}');
+  s.push('.subtitle{font-size:13px;color:#78716c;margin-bottom:4px;}');
+  s.push('.contacts{font-size:12px;color:#44403c;display:flex;flex-wrap:wrap;gap:12px;margin-bottom:6px;}');
+  s.push('.divider{border:none;border-top:2px solid #1c1917;margin:10px 0 16px;}');
+  s.push('h2{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid #e7e5e4;padding-bottom:3px;margin:16px 0 8px;}');
+  s.push('.summary{font-size:12.5px;color:#44403c;line-height:1.65;margin-bottom:4px;}');
+  s.push('.exp-block{margin-bottom:13px;}');
+  s.push('.exp-header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}');
+  s.push('.exp-role{font-size:13px;font-weight:700;}');
+  s.push('.exp-co{font-size:12px;color:#44403c;font-style:italic;}');
+  s.push('.exp-period{font-size:11px;color:#78716c;white-space:nowrap;flex-shrink:0;}');
+  s.push('ul{list-style:disc;padding-left:16px;margin-top:5px;}');
+  s.push('li{font-size:12px;color:#44403c;line-height:1.55;margin-bottom:2px;}');
+  s.push('.skills-section{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;margin-top:4px;}');
+  s.push('.skill-cat{font-size:12px;font-weight:700;}');
+  s.push('.skill-val{font-size:12px;color:#44403c;}');
+  s.push('.edu-block{margin-bottom:8px;}');
+  s.push('.edu-header{display:flex;justify-content:space-between;align-items:baseline;}');
+  s.push('.edu-deg{font-size:13px;font-weight:700;}');
+  s.push('.edu-inst{font-size:12px;color:#44403c;font-style:italic;}');
+  s.push('.edu-per{font-size:11px;color:#78716c;white-space:nowrap;}');
+  s.push('@media print{body{padding:1rem;}}');
+  s.push('</sty'+'le></head><body>');
+  s.push('<h1>Lucilia Rosa</h1>');
+  s.push('<p class="subtitle">Fullstack &amp; Automation Developer</p>');
+  s.push('<div class="contacts"><span>lucilia.passos.rosa@outlook.com</span><span>linkedin.com/in/lucilia-rosa</span><span>github.com/luciliarosa</span><span>São Paulo, Brazil (Open to Canada)</span></div>');
+  s.push('<hr class="divider"/>');
+  s.push('<h2>Professional Summary</h2>');
+  s.push('<p class="summary">Results-driven Fullstack &amp; Automation Developer with 7+ years of experience in systems development, process automation, and technical support. Proficient in Python, SQL, and Microsoft Power Platform, with a solid foundation in frontend development. Recognized for building data-driven solutions that significantly reduce manual workload &mdash; one automation reduced a full day of work to under one hour. Seeking opportunities in Canada to contribute to innovative, cross-functional teams.</p>');
+  s.push('<h2>Work Experience</h2>');
+  s.push('<div class="exp-block"><div class="exp-header"><div><p class="exp-role">Systems Developer</p><p class="exp-co">SENAI Bras &middot; São Paulo, Brazil (On-site)</p></div><p class="exp-period">Jul 2025 &ndash; Present</p></div>');
+  s.push('<ul><li>Developed Python automation that reads Excel data, sends it to an AI for analysis, and emails results to stakeholders &mdash; reducing a full day of manual work to under 1 hour</li><li>Built a Playwright web automation to download student satisfaction surveys and feed Power BI dashboards automatically</li><li>Designed and maintained Power BI dashboards for educational data monitoring</li><li>Created Power Automate workflows to streamline internal operational processes</li><li>Modeled and queried relational databases using SQL for reporting and analytics</li></ul></div>');
+  s.push('<div class="exp-block"><div class="exp-header"><div><p class="exp-role">Application Support Analyst</p><p class="exp-co">Vertem &middot; São Paulo, Brazil (On-site)</p></div><p class="exp-period">Mar 2022 &ndash; Jul 2025</p></div>');
+  s.push('<ul><li>Diagnosed and resolved platform issues for a loyalty and rewards e-commerce system</li><li>Developed Python scripts to automate daily and weekly report generation</li><li>Performed frontend maintenance using HTML, CSS, and JavaScript</li><li>Participated in war rooms for critical incident response and resolution under pressure</li><li>Authored comprehensive technical documentation and delivered training to new hires and cross-functional teams</li></ul></div>');
+  s.push('<div class="exp-block"><div class="exp-header"><div><p class="exp-role">Computer Network Technician (NOC)</p><p class="exp-co">Telium Networks &middot; São Paulo, Brazil (On-site)</p></div><p class="exp-period">Apr 2018 &ndash; Mar 2022</p></div>');
+  s.push('<ul><li>Operated in the NOC monitoring all network assets: wireless radios, backbones, and telephony equipment</li><li>Supported field technicians remotely in identifying fiber optic breaks and network failures</li><li>Co-led infrastructure mapping project to assess equipment maintenance needs for ENEL standardization compliance</li><li>Provided technical support to dedicated internet clients</li></ul></div>');
+  s.push('<h2>Technical Skills</h2>');
+  s.push('<div class="skills-section"><span class="skill-cat">Languages</span><span class="skill-val">Python, JavaScript, HTML, CSS</span><span class="skill-cat">Frameworks</span><span class="skill-val">React, Node.js, Playwright, FastAPI</span><span class="skill-cat">Databases</span><span class="skill-val">SQL Server, MySQL</span><span class="skill-cat">Platforms</span><span class="skill-val">Power BI, Power Automate, Power Apps, SharePoint</span><span class="skill-cat">Tools</span><span class="skill-val">Git, GitHub, Postman, VS Code, Jira</span><span class="skill-cat">Other</span><span class="skill-val">REST APIs, System Integration, Technical Documentation</span></div>');
+  s.push('<h2>Education</h2>');
+  s.push('<div class="edu-block"><div class="edu-header"><div><p class="edu-deg">Postgraduate Certificate &mdash; Full Stack Development</p><p class="edu-inst">Descomplica</p></div><p class="edu-per">May 2023 &ndash; Oct 2024</p></div></div>');
+  s.push('<div class="edu-block"><div class="edu-header"><div><p class="edu-deg">Bachelor\'s Degree &mdash; Systems Analysis and Development</p><p class="edu-inst">FATEC Carapicuiba (Public university, selective entry)</p></div><p class="edu-per">Feb 2022 &ndash; Dec 2024</p></div></div>');
+  s.push('<div class="edu-block"><div class="edu-header"><div><p class="edu-deg">Bachelor\'s Degree &mdash; Information Technology Management</p><p class="edu-inst">FATEC Barueri (Public university, selective entry)</p></div><p class="edu-per">Feb 2015 &ndash; Dec 2017</p></div></div>');
+  s.push('<div class="edu-block"><div class="edu-header"><div><p class="edu-deg">Technical Diploma &mdash; Computer Networks</p><p class="edu-inst">SENAI Jandira (Selective admission)</p></div><p class="edu-per">Jul 2012 &ndash; Jul 2014</p></div></div>');
+  s.push('<h2>Languages</h2>');
+  s.push('<div class="skills-section"><span class="skill-cat">Portuguese</span><span class="skill-val">Native</span><span class="skill-cat">English</span><span class="skill-val">Intermediate B2 &middot; Exchange at SGIC, Vancouver, Canada (2019)</span></div>');
+  s.push('</bo'+'dy></html>');
+  return s.join('\n');
+}
+
+// ── VOLTAR AO TOPO ──
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backToTop');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
 });
 
 // ── PROJETOS DA EXPERIÊNCIA ──
