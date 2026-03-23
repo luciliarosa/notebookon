@@ -135,6 +135,10 @@
     .pinned h4 { font-size:13px; font-weight:700; color:#92400e; margin-bottom:3px; }
     .pinned p  { font-size:12px; color:#a16207; line-height:1.6; }
 
+    .back-to-top{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:90;transform:translateY(8px);}
+    .back-to-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+    .back-to-top:hover{background:var(--ink2);}
+
     /* ── FOOTER ── */
     .footer { max-width:860px; margin:0 auto; padding:1.5rem 1.5rem 3rem; border-top:1.5px solid var(--rule2); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
     .footer span { font-size:12px; color:var(--ink4); font-family:var(--font-mono); }
@@ -230,8 +234,7 @@
     <span class="pinned-icon">&#x1F4CC;</span>
     <div>
       <h4 data-i18n="pinned_title">Nota da Lucilia</h4>
-      <p data-i18n="pinned_text">Esse caderno é o meu jeito de revisar e fixar o conteúdo. Clique em qualquer matéria para ver os tópicos e acessar as aulas anotadas.</p>
-    </div>
+      <p data-i18n="pinned_text">Esse caderno é o meu jeito de revisar e fixar o conteúdo. Clique em qualquer matéria para ver os tópicos e acessar as aulas anotadas.</p>    </div>
   </div>
 
   <!-- PROFILE CARDS -->
@@ -581,6 +584,12 @@ function toggleNavDropdown(){
   btn.classList.toggle('open',!open);
   panel.classList.toggle('open',!open);
 }
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backToTop');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
 
 document.addEventListener('click',e=>{
   const dd=document.getElementById('navDropdown');
