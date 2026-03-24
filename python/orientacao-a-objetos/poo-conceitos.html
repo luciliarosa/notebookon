@@ -70,6 +70,12 @@
     .breadcrumb a { color:var(--ink3); text-decoration:none; }
     .breadcrumb a:hover { color:var(--accent2); }
 
+    /* ── PINNED ── */
+    .pinned { background:#fffbeb; border:1.5px solid rgba(180,140,20,.25); border-radius:var(--radius); padding:16px 20px; display:flex; gap:12px; align-items:flex-start; margin-bottom:2rem; }
+    .pinned-icon { font-size:20px; flex-shrink:0; }
+    .pinned h4 { font-size:13px; font-weight:700; color:#92400e; margin-bottom:3px; }
+    .pinned p { font-size:12px; color:#a16207; line-height:1.6; }
+
     /* HERO */
     .article-hero { padding:2rem 0 2.5rem; }
     .article-eyebrow {
@@ -174,6 +180,94 @@
     .slf { color:#f38ba8; }
     .vr  { color:#fab387; }
 
+    /* BISCOITO DIAGRAM */
+    .biscoito-demo {
+      background:#fff; border:1.5px solid var(--rule);
+      border-radius:var(--radius); padding:24px;
+      box-shadow:var(--shadow);
+      display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;
+    }
+    .biscoito-visual {
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+      flex-shrink:0;
+    }
+    .biscoito-icon {
+      font-size:48px; line-height:1;
+    }
+    .biscoito-arrow {
+      font-size:20px; color:var(--ink4);
+    }
+    .biscoito-class-box {
+      border:2px solid var(--ink);
+      border-radius:8px;
+      overflow:hidden;
+      min-width:210px;
+      font-family:var(--font-mono);
+      font-size:12px;
+    }
+    .biscoito-class-header {
+      background:#1e1c1a; color:#fab387;
+      font-weight:700; font-size:13px;
+      padding:8px 14px; text-align:center;
+      letter-spacing:.02em;
+    }
+    .biscoito-section {
+      padding:10px 14px;
+      border-top:1.5px solid var(--rule);
+    }
+    .biscoito-section:first-of-type { border-top:none; }
+    .biscoito-section-label {
+      font-size:10px; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; color:var(--ink4);
+      margin-bottom:6px;
+      writing-mode:horizontal-tb;
+    }
+    .biscoito-item {
+      display:flex; align-items:baseline; gap:6px;
+      font-size:12px; color:var(--ink2);
+      padding:2px 0;
+    }
+    .biscoito-item .plus {
+      color:#1D9E75; font-weight:700; font-size:13px; flex-shrink:0;
+    }
+    .biscoito-item.method .plus { color:#7F77DD; }
+    .biscoito-sidebar {
+      display:flex; flex-direction:column; justify-content:space-between;
+      gap:0; position:relative;
+    }
+    .biscoito-side-label {
+      writing-mode:vertical-rl;
+      text-orientation:mixed;
+      transform:rotate(180deg);
+      font-size:10px; font-weight:700; letter-spacing:.12em;
+      text-transform:uppercase; color:#fff;
+      padding:10px 5px;
+      border-radius:0 6px 6px 0;
+    }
+    .biscoito-side-attr { background:#378ADD; }
+    .biscoito-side-met  { background:#7F77DD; }
+
+    .biscoito-desc {
+      flex:1; min-width:200px;
+    }
+    .biscoito-desc h3 {
+      font-size:14px; font-weight:700; color:var(--ink); margin-bottom:8px;
+    }
+    .biscoito-desc p {
+      font-size:12.5px; color:var(--ink2); line-height:1.7; margin-bottom:10px;
+    }
+    .biscoito-desc ul {
+      list-style:none; padding:0;
+    }
+    .biscoito-desc ul li {
+      font-size:12px; color:var(--ink2); line-height:1.6;
+      padding:2px 0 2px 16px; position:relative;
+    }
+    .biscoito-desc ul li::before {
+      content:'→'; position:absolute; left:0;
+      color:var(--accent2); font-size:11px;
+    }
+
     /* NAV PAGES */
     .nav-pages { display:flex; gap:12px; margin-top:2.5rem; flex-wrap:wrap; }
     .nav-page {
@@ -198,6 +292,7 @@
       .page { padding:0 1rem 4rem; }
       .cards-2 { grid-template-columns:1fr; }
       .cards-4 { grid-template-columns:repeat(2,1fr); }
+      .biscoito-demo { flex-direction:column; }
     }
     @media(max-width:380px){ .cards-4 { grid-template-columns:1fr; } }
   </style>
@@ -376,6 +471,101 @@
 <span class="vr">c2</span> = <span class="fn">Caneta</span>(<span class="str">"vermelha"</span>, <span class="str">"Pilot"</span>)
 <span class="vr">c1</span>.<span class="fn">destampar</span>()
 <span class="vr">c1</span>.<span class="fn">escrever</span>()  <span class="cm"># → Escrevendo com azul</span></pre>
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- BISCOITO CORAÇÃO -->
+  <section style="margin-bottom:2rem" class="fade">
+    <p class="sec-title">Outro exemplo — classe BiscoitoCoracao</p>
+    <div class="biscoito-demo">
+
+      <!-- Diagrama visual -->
+      <div class="biscoito-visual">
+        <div class="biscoito-icon">🍪</div>
+        <div class="biscoito-arrow">↓</div>
+        <div style="display:flex; align-items:stretch;">
+          <div class="biscoito-class-box">
+            <div class="biscoito-class-header">BiscoitoCoracao</div>
+
+            <!-- Atributos -->
+            <div class="biscoito-section">
+              <div class="biscoito-item"><span class="plus">+</span> tamanho</div>
+              <div class="biscoito-item"><span class="plus">+</span> massa</div>
+              <div class="biscoito-item"><span class="plus">+</span> peso</div>
+              <div class="biscoito-item"><span class="plus">+</span> cobertura</div>
+              <div class="biscoito-item"><span class="plus">+</span> cozido</div>
+              <div class="biscoito-item"><span class="plus">+</span> temperatura</div>
+            </div>
+
+            <!-- Métodos -->
+            <div class="biscoito-section" style="border-top:1.5px solid var(--rule); background:var(--paper2);">
+              <div class="biscoito-item method"><span class="plus">+</span> cozinhar()</div>
+              <div class="biscoito-item method"><span class="plus">+</span> congelar()</div>
+            </div>
+          </div>
+
+          <!-- Labels laterais -->
+          <div style="display:flex; flex-direction:column; margin-left:4px; gap:4px;">
+            <div class="biscoito-side-label biscoito-side-attr" style="flex:3">atributos</div>
+            <div class="biscoito-side-label biscoito-side-met" style="flex:1">métodos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Descrição -->
+      <div class="biscoito-desc">
+        <h3>Como funciona esse exemplo?</h3>
+        <p>A classe <strong>BiscoitoCoracao</strong> modela um biscoito em formato de coração. Ela reúne tudo que um biscoito <em>tem</em> (atributos) e tudo que pode ser <em>feito</em> com ele (métodos).</p>
+        <ul>
+          <li><strong>tamanho, massa, peso</strong> — características físicas do biscoito</li>
+          <li><strong>cobertura</strong> — tipo de cobertura (chocolate, glacê…)</li>
+          <li><strong>cozido</strong> — estado atual: está assado ou não?</li>
+          <li><strong>temperatura</strong> — temperatura atual do biscoito</li>
+          <li><strong>cozinhar()</strong> — método que muda <em>cozido</em> para True e ajusta a temperatura</li>
+          <li><strong>congelar()</strong> — método que reduz a temperatura do biscoito</li>
+        </ul>
+        <p style="margin-top:10px; font-size:12px; color:var(--ink4)">
+          💡 O símbolo <strong style="color:#1D9E75">+</strong> indica que o atributo ou método é <em>público</em> — qualquer parte do programa pode acessá-lo.
+        </p>
+      </div>
+    </div>
+  <br>
+  <!-- ── PINNED ── -->
+  <div class="pinned fade-up">
+    <span class="pinned-icon">📌</span>
+    <div>
+      <h4 data-i18n="pinned_title">Lembrete</h4>
+      <p data-i18n="pinned_text">Objetos instanciados a partir de uma mesma classe compartilham as mesmas características (atributos) e métodos.</p>
+    </div>
+  </div>
+    <!-- Código -->
+    <div style="margin-top:16px;">
+      <div class="code-wrap">
+        <pre><span class="kw">class</span> <span class="vr">BiscoitoCoracao</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, <span class="vr">tamanho</span>, <span class="vr">massa</span>, <span class="vr">peso</span>, <span class="vr">cobertura</span>):
+        <span class="slf">self</span>.tamanho    = <span class="vr">tamanho</span>
+        <span class="slf">self</span>.massa      = <span class="vr">massa</span>
+        <span class="slf">self</span>.peso       = <span class="vr">peso</span>
+        <span class="slf">self</span>.cobertura  = <span class="vr">cobertura</span>
+        <span class="slf">self</span>.cozido     = <span class="kw">False</span>   <span class="cm"># começa cru</span>
+        <span class="slf">self</span>.temperatura = <span class="vr">20</span>     <span class="cm"># temperatura ambiente (°C)</span>
+
+    <span class="kw">def</span> <span class="fn">cozinhar</span>(<span class="slf">self</span>):
+        <span class="slf">self</span>.cozido      = <span class="kw">True</span>
+        <span class="slf">self</span>.temperatura = <span class="vr">180</span>
+        <span class="fn">print</span>(<span class="str">f"Biscoito assado a {</span><span class="slf">self</span>.temperatura<span class="str">}°C!"</span>)
+
+    <span class="kw">def</span> <span class="fn">congelar</span>(<span class="slf">self</span>):
+        <span class="slf">self</span>.temperatura = <span class="vr">-18</span>
+        <span class="fn">print</span>(<span class="str">f"Biscoito congelado a {</span><span class="slf">self</span>.temperatura<span class="str">}°C."</span>)
+
+<span class="cm"># Criando uma instância</span>
+<span class="vr">b1</span> = <span class="fn">BiscoitoCoracao</span>(<span class="str">"médio"</span>, <span class="str">"manteiga"</span>, <span class="vr">30</span>, <span class="str">"chocolate"</span>)
+<span class="vr">b1</span>.<span class="fn">cozinhar</span>()   <span class="cm"># → Biscoito assado a 180°C!</span>
+<span class="vr">b1</span>.<span class="fn">congelar</span>()   <span class="cm"># → Biscoito congelado a -18°C.</span></pre>
+      </div>
     </div>
   </section>
 
