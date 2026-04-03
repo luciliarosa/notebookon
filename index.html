@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📓</text></svg>"/>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucilia Rosa</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,7 +49,7 @@
       display: flex; align-items: center; gap: 0; height: 56px;
     }
     .nav-brand {
-      font-family: var(--font-serif); font-size: 15px; font-weight: 600;
+      font-family: var(--font-serif); font-size: 16px; font-weight: 600;
       color: var(--ink); text-decoration: none;
       display: flex; align-items: center; gap: 8px;
       margin-right: 1.5rem; white-space: nowrap;
@@ -60,6 +59,62 @@
       font-size: 13px; font-weight: 600; color: var(--ink3);
       text-decoration: none; padding: 6px 12px; border-radius: 6px;
       transition: background .15s, color .15s; white-space: nowrap;
+    }
+    /* ── CARROSSEL ── */
+    .card-carousel{
+      position:relative;
+      height:160px;
+      overflow:hidden;
+      border-bottom:1.5px solid var(--rule2);
+      background:var(--paper2);
+      cursor:pointer;
+    }
+    /* faixa de slides */
+    .carousel-track{
+      display:flex;
+      height:100%;
+      transition:transform .4s cubic-bezier(.4,0,.2,1);
+      will-change:transform;
+    }
+    /* cada slide */
+    .carousel-slide{
+      flex:0 0 100%;
+      height:100%;
+      position:relative;
+    }
+    .carousel-slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    /* placeholder quando não há imagem */
+    .carousel-placeholder{
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      background:var(--paper2);
+    }
+    .carousel-placeholder span{font-size:36px;opacity:.35;}
+    .carousel-placeholder p{
+      font-family:var(--font-mono);
+      font-size:10px;
+      color:var(--ink4);
+      letter-spacing:.04em;
+    }
+    /* overlay gradiente sutil */
+    .card-carousel::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(28,25,23,.18) 0%, transparent 50%);
+      pointer-events:none;
     }
     .nav-link:hover { background: var(--paper3); color: var(--ink); }
     .nav-link.active { background: var(--ink); color: var(--paper); }
@@ -311,7 +366,7 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="index.html" class="nav-brand">Lucilia's Notebook</a>
+  <a href="index.html" class="nav-brand">Lucilia Rosa | Software Developer</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link active" data-i18n="nav_home">Home</a>
     <span class="nav-sep"></span>
@@ -356,7 +411,7 @@
 
   <!-- SKILLS -->
   <section class="sec fade-up">
-    <p class="sec-label" data-i18n="sec_skills">🛠️ Habilidades</p>
+    <p class="sec-label" data-i18n="sec_skills">Habilidades</p>
     <div class="skills-grid">
       <span class="skill-pill"><span class="sp-icon">🐍</span> Python</span>
       <span class="skill-pill"><span class="sp-icon">⚡</span> JavaScript</span>
@@ -372,7 +427,7 @@
 
   <!-- ABOUT -->
   <section class="sec fade-up">
-    <p class="sec-label" data-i18n="sec_about">👤 Sobre mim</p>
+    <p class="sec-label" data-i18n="sec_about">Sobre mim</p>
     <div class="about-card">
       <div class="about-block">
         <h4 data-i18n="about_h1">Quem sou eu</h4>
@@ -395,12 +450,18 @@
 
   <!-- PROJECTS -->
   <section class="sec fade-up">
-    <p class="sec-label" data-i18n="sec_projects">🚀 Projetos em destaque</p>
+    <p class="sec-label" data-i18n="sec_projects">Projetos em destaque</p>
     <div class="projects-grid">
       <a href="sobre-mim/projetos.html" class="project-card">
         <div class="pc-top full"></div>
         <div class="pc-body">
-          <div class="pc-icon">📓</div>
+          <div class="card-carousel" data-images='[
+                "img/project1.png",
+                "img/project2.png",
+                "img/project3.png",
+                "img/project4.png"
+        ]' data-badge="badge-html" data-badge-text="HTML &amp; CSS">
+        </div><br>
           <p class="pc-name" data-i18n="proj1_name">Lucilia's Notebook</p>
           <p class="pc-desc" data-i18n="proj1_desc">Site de anotações de estudos com sistema de busca, carrossel e suporte a PT/EN. Interface completa com HTML, CSS e JS.</p>
         </div>
@@ -474,67 +535,74 @@
 
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>
 
-<script>
+<script id="script-fix">
 const T = {
   pt:{
     nav_home:"Home", nav_about:"Sobre mim", nav_projects:"Projetos",
-    nav_areas:"Frontend · Backend · Fullstack", nav_notebook:"📓 Caderno de Estudos",
+    nav_areas:"Frontend · Backend · Fullstack", nav_notebook:"Caderno de Estudos",
     eyebrow:"// fullstack & automation developer",
     hero_title:"Fullstack &amp; Automation Developer", hero_badge:"São Paulo, BR",
     hero_bio:"Desenvolvedora com foco em automação, aplicações web e aprendizado contínuo. Apaixonada por código limpo, boas interfaces e resolver problemas reais com tecnologia.",
-    cta_projects:"🚀 Ver projetos", cta_about:"👤 Sobre mim",
+    cta_projects:"Ver projetos", cta_about:"Sobre mim",
     hero_status:"Disponível para oportunidades",
-    sec_skills:"🛠️ Habilidades", sec_projects:"🚀 Projetos em destaque", sec_about:"👤 Sobre mim",
-    proj1_name:"Lucilia's Notebook", proj1_desc:"Site de anotações de estudos com sistema de busca, carrossel e suporte a PT/EN. Interface completa com HTML, CSS e JS.",
-    proj2_name:"Automação com Python", proj2_desc:"Scripts de automação para tarefas repetitivas — web scraping, manipulação de arquivos e integração com APIs.",
-    proj3_name:"Interfaces React", proj3_desc:"Componentes e aplicações com React — hooks, estado e consumo de APIs externas.",
+    sec_skills:"Habilidades", sec_projects:"Projetos em destaque", sec_about:"Sobre mim",
+    proj1_name:"Lucilia Rosa | Developer", 
+    proj1_desc:"Site de portfólio com sistema de busca, carrossel e suporte a PT/EN. Interface completa com HTML, CSS e JS.",
+    proj2_name:"Automação com Python", 
+    proj2_desc:"Scripts de automação para tarefas repetitivas — web scraping, manipulação de arquivos e integração com APIs.",
+    proj3_name:"Interfaces React", 
+    proj3_desc:"Componentes e aplicações com React — hooks, estado e consumo de APIs externas.",
     proj_link:"Ver →", all_projects:"Ver todos os projetos →",
-    about_h1:"Quem sou eu", about_p1:"Desenvolvedora Fullstack &amp; Automation com base em São Paulo. Estou em constante evolução, combinando cursos, projetos práticos e muita documentação — além de um caderno de estudos que virou projeto por si só.",
+    about_h1:"Quem sou eu", 
+    about_p1:"Desenvolvedora Fullstack &amp; Automation com base em São Paulo. Estou em constante evolução, combinando cursos, projetos práticos e muita documentação — além de um caderno de estudos que virou projeto por si só.",
     about_h2:"O que eu faço",
-    about_li1:"Desenvolvimento web (Frontend &amp; Fullstack)", about_li2:"Automação com Python",
-    about_li3:"Modelagem e consultas SQL", about_li4:"Controle de versão com Git &amp; GitHub",
+    about_li1:"Desenvolvimento web (Frontend &amp; Fullstack)", 
+    about_li2:"Automação com Python", 
+    about_li3:"Modelagem e consultas SQL", 
+    about_li4:"Controle de versão com Git &amp; GitHub",
     full_about:"Ler história completa →",
-    nc_eyebrow:"// também por aqui", nc_title:"Meu <em>Caderno de Estudos</em>",
-    nc_desc:"Anotações organizadas de tudo que aprendo — Python, HTML, CSS, JavaScript, Git, SQL e English. Do jeito que entendi, para revisar quando precisar.",
-    nc_btn:"Abrir caderno →",
-    footer_rights:"Todos os direitos reservados.", footer_made:"Feito com 🍫 e muito código"
+    footer_rights:"Todos os direitos reservados.", 
+    footer_made:"Feito com 🍫 e muito código"
   },
   en:{
     nav_home:"Home", nav_about:"About me", nav_projects:"Projects",
-    nav_areas:"Frontend · Backend · Fullstack", nav_notebook:"📓 Study Notebook",
+    nav_areas:"Frontend · Backend · Fullstack", nav_notebook:"Study Notebook",
     eyebrow:"// fullstack & automation developer",
     hero_title:"Fullstack &amp; Automation Developer", hero_badge:"São Paulo, BR",
-    hero_bio:"Developer focused on automation, web applications and continuous learning. Passionate about clean code, great interfaces and solving real problems with technology.",
-    cta_projects:"🚀 View projects", cta_about:"👤 About me",
+    hero_bio:"Developer focused on automation and web applications.",
+    cta_projects:"View projects", cta_about:"About me",
     hero_status:"Open to opportunities",
-    sec_skills:"🛠️ Skills", sec_projects:"🚀 Featured projects", sec_about:"👤 About me",
+    sec_skills:"Skills", sec_projects:"Featured projects", sec_about:"About me",
     proj1_name:"Lucilia's Notebook", proj1_desc:"Study notes site with search system, carousel and PT/EN support. Full interface with HTML, CSS and JS.",
-    proj2_name:"Python Automation", proj2_desc:"Automation scripts for repetitive tasks — web scraping, file manipulation and API integration.",
+    proj2_name:"Python Automation", proj2_desc:"Automation scripts for repetitive tasks — web scraping, file manipulation and API integration.", 
     proj3_name:"React Interfaces", proj3_desc:"Components and applications with React — hooks, state and external API consumption.",
     proj_link:"View →", all_projects:"View all projects →",
-    about_h1:"Who I am", about_p1:"Fullstack &amp; Automation Developer based in São Paulo. Constantly evolving, combining courses, hands-on projects and lots of documentation — plus a study notebook that became a project of its own.",
+    about_h1:"Who I am", 
+    about_p1:"Fullstack &amp; Automation Developer based in São Paulo. Constantly evolving, combining courses, hands-on projects and lots of documentation — plus a study notebook that became a project of its own.",
     about_h2:"What I do",
-    about_li1:"Web development (Frontend &amp; Fullstack)", about_li2:"Automation with Python",
-    about_li3:"SQL modeling and queries", about_li4:"Version control with Git &amp; GitHub",
+    about_li1:"Web development (Frontend &amp; Fullstack)", 
+    about_li2:"Automation with Python", 
+    about_li3:"SQL modeling and queries", 
+    about_li4:"Version control with Git &amp; GitHub",
     full_about:"Read full story →",
-    nc_eyebrow:"// also here", nc_title:"My <em>Study Notebook</em>",
-    nc_desc:"Organized notes of everything I learn — Python, HTML, CSS, JavaScript, Git, SQL and English. The way I understood it, to review whenever needed.",
-    nc_btn:"Open notebook →",
-    footer_rights:"All rights reserved.", footer_made:"Made with 🍫 and lots of code"
+    footer_rights:"All rights reserved.", 
+    footer_made:"Made with 🍫 and code"
   }
 };
 
 let lang = localStorage.getItem('nb_lang') || 'pt';
 
 function setLang(l) {
-  lang = l; localStorage.setItem('nb_lang', l);
+  lang = l;
+  localStorage.setItem('nb_lang', l);
   document.body.classList.add('lang-switching');
-  setTimeout(() => {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const v = T[l][el.getAttribute('data-i18n')];
+  setTimeout(function() {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var v = T[l][el.getAttribute('data-i18n')];
       if (v !== undefined) el.innerHTML = v;
     });
     document.documentElement.lang = l === 'pt' ? 'pt-BR' : 'en';
+    document.title = l === 'pt' ? 'Lucilia Rosa' : 'Lucilia Rosa';
     document.getElementById('btn-pt').classList.toggle('active', l === 'pt');
     document.getElementById('btn-en').classList.toggle('active', l === 'en');
     document.body.classList.remove('lang-switching');
@@ -543,9 +611,59 @@ function setLang(l) {
 
 if (lang === 'en') setLang('en');
 
+/* ─── CARROSSEL FUNCIONANDO ─── */
+function buildCarousels(){
+  document.querySelectorAll('.card-carousel').forEach(container => {
+
+    const raw = container.getAttribute('data-images');
+    let images = [];
+
+    try {
+      images = JSON.parse(raw);
+    } catch(e){
+      console.error('Erro no JSON do carousel', e);
+      return;
+    }
+
+    if (!images.length) return;
+
+    const track = document.createElement('div');
+    track.classList.add('carousel-track');
+
+    images.forEach(src => {
+      const slide = document.createElement('div');
+      slide.classList.add('carousel-slide');
+
+      const img = document.createElement('img');
+      img.src = src;
+
+      slide.appendChild(img);
+      track.appendChild(slide);
+    });
+
+    container.appendChild(track);
+
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }, 3000);
+  });
+}
+
+/* ─── BOTÃO VOLTAR AO TOPO ─── */
 window.addEventListener('scroll', () => {
   const btn = document.getElementById('backToTop');
-  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+  if (btn) {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }
+});
+
+/* ─── INIT ─── */
+document.addEventListener('DOMContentLoaded', () => {
+  setLang(lang);
+  buildCarousels();
 });
 </script>
 </body>

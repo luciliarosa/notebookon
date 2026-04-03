@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Projetos — Lucilia Rosa</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📓</text></svg>"/>
+  <title>Lucilia Rosa</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -250,41 +250,15 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="nav">
-  <a href="../index.html" class="nav-brand"><span>📓</span> Lucilia's Notebook</a>
+  <a href="../index.html" class="nav-brand">Lucilia Rosa | Software Developer</a>
   <div class="nav-links">
-    <div class="nav-dropdown" id="navDropdown">
-      <button class="nav-dropdown-btn" id="navDropdownBtn" onclick="toggleNavDropdown()">
-        <span data-i18n="nav_profile">Perfil &amp; Projetos ▾</span>
-      </button>
-      <div class="nav-dropdown-panel" id="navDropdownPanel">
-        <a href="sobre-mim.html" class="nav-dropdown-item">
-          <div class="ndi-icon" style="background:linear-gradient(135deg,#fce7f3,#dbeafe);border:2px solid #f9a8d4;">L</div>
-          <div class="ndi-text">
-            <span class="ndi-name" data-i18n="nav_dd_about">Sobre mim</span>
-            <span class="ndi-desc" data-i18n="nav_dd_about_desc">Trajetória, habilidades e história</span>
-          </div>
-        </a>
-        <a href="projetos.html" class="nav-dropdown-item">
-          <div class="ndi-icon" style="background:linear-gradient(135deg,#dcfce7,#fef9c3);border:2px solid #86efac;font-size:16px;">🚀</div>
-          <div class="ndi-text">
-            <span class="ndi-name" data-i18n="nav_dd_projects">Projetos</span>
-            <span class="ndi-desc" data-i18n="nav_dd_projects_desc">HTML, Python, JavaScript e React</span>
-          </div>
-        </a>
-        <a href="dev-areas.html" class="nav-dropdown-item">
-          <div class="ndi-icon" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);border:2px solid #93c5fd;font-size:16px;">🖥️</div>
-          <div class="ndi-text">
-            <span class="ndi-name" data-i18n="nav_dd_areas">Frontend, Backend &amp; Fullstack</span>
-            <span class="ndi-desc" data-i18n="nav_dd_areas_desc">O que é cada área e como se conectam</span>
-          </div>
-        </a>
-      </div>
-    </div>
-    <span class="nav-sep"></span>
     <a href="../index.html" class="nav-link" data-i18n="nav_home">Home</a>
     <span class="nav-sep"></span>
-    <a href="projetos.html" class="nav-link active" data-i18n="nav_this">Projetos</a>
+    <a href="sobre-mim.html" class="nav-link" data-i18n="nav_about">Sobre mim</a>
+    <a href="projetos.html" class="nav-link active" data-i18n="nav_projects">Projetos</a>
+    <a href="dev-areas.html" class="nav-link" data-i18n="nav_areas">Frontend · Backend · Fullstack</a>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">🇧🇷 PT</button>
@@ -546,7 +520,7 @@
 /* ─── i18n ─── */
 const T = {
   pt:{
-    nav_profile:"Perfil &amp; Projetos ▾",
+    nav_home:"Home", nav_about:"Sobre mim", nav_projects:"Projetos",
     nav_dd_about:"Sobre mim",nav_dd_about_desc:"Trajetória, habilidades e história",
     nav_dd_projects:"Projetos",nav_dd_projects_desc:"HTML, Python, JavaScript e React",
     nav_dd_areas:"Frontend, Backend &amp; Fullstack",nav_dd_areas_desc:"O que é cada área e como se conectam",
@@ -570,7 +544,7 @@ const T = {
     btn_no_repo:"Sem repositório",btn_soon:"Em breve",
   },
   en:{
-    nav_profile:"Profile &amp; Projects ▾",
+    nav_home:"Home", nav_about:"About me", nav_projects:"Projects",
     nav_dd_about:"About me",nav_dd_about_desc:"Background, skills and story",
     nav_dd_projects:"Projects",nav_dd_projects_desc:"HTML, Python, JavaScript and React",
     nav_dd_areas:"Frontend, Backend &amp; Fullstack",nav_dd_areas_desc:"What each area is and how they connect",
