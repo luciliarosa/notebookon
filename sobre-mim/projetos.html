@@ -35,8 +35,6 @@
     .nav-link:hover{background:var(--paper3);color:var(--ink);}
     .nav-link.active{background:var(--ink);color:var(--paper);}
     .nav-sep{width:1px;height:18px;background:var(--rule);margin:0 4px;flex-shrink:0;}
-    .nav-back{font-size:13px;font-weight:600;color:var(--ink3);text-decoration:none;padding:6px 14px;border-radius:6px;border:1.5px solid var(--rule);transition:background .15s,color .15s;white-space:nowrap;}
-    .nav-back:hover{background:var(--paper3);color:var(--ink);}
     .lang-toggle{display:flex;align-items:center;gap:2px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:8px;padding:3px;flex-shrink:0;}
     .lang-btn{font-size:12px;font-weight:700;padding:4px 10px;border-radius:5px;border:none;cursor:pointer;background:transparent;color:var(--ink4);transition:background .15s,color .15s;font-family:var(--font-body);display:flex;align-items:center;gap:5px;}
     .lang-btn.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(28,25,23,.10);}
@@ -101,17 +99,119 @@
     .bar-python{background:linear-gradient(90deg,var(--cat-python),#60a5fa);}
     .bar-js{background:linear-gradient(90deg,var(--cat-js),#facc15);}
     .bar-react{background:linear-gradient(90deg,var(--cat-react),#22d3ee);}
-    .card-preview{height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1.5px solid var(--rule2);}
-    .preview-html{background:linear-gradient(135deg,#fff7ed,#ffedd5);}
-    .preview-python{background:linear-gradient(135deg,#dbeafe,#eff6ff);}
-    .preview-js{background:linear-gradient(135deg,#fefce8,#fef9c3);}
-    .preview-react{background:linear-gradient(135deg,#ecfeff,#cffafe);}
-    .preview-icon{font-size:44px;opacity:.3;}
-    .preview-badge{position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:10px;font-weight:500;padding:3px 8px;border-radius:4px;}
+
+    /* ── CARROSSEL ── */
+    .card-carousel{
+      position:relative;
+      height:160px;
+      overflow:hidden;
+      border-bottom:1.5px solid var(--rule2);
+      background:var(--paper2);
+      cursor:pointer;
+    }
+    /* faixa de slides */
+    .carousel-track{
+      display:flex;
+      height:100%;
+      transition:transform .4s cubic-bezier(.4,0,.2,1);
+      will-change:transform;
+    }
+    /* cada slide */
+    .carousel-slide{
+      flex:0 0 100%;
+      height:100%;
+      position:relative;
+    }
+    .carousel-slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    /* placeholder quando não há imagem */
+    .carousel-placeholder{
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      background:var(--paper2);
+    }
+    .carousel-placeholder span{font-size:36px;opacity:.35;}
+    .carousel-placeholder p{
+      font-family:var(--font-mono);
+      font-size:10px;
+      color:var(--ink4);
+      letter-spacing:.04em;
+    }
+    /* overlay gradiente sutil */
+    .card-carousel::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(28,25,23,.18) 0%, transparent 50%);
+      pointer-events:none;
+    }
+    /* badge de tecnologia */
+    .preview-badge{
+      position:absolute;
+      top:10px;right:10px;
+      font-family:var(--font-mono);font-size:10px;font-weight:500;
+      padding:3px 8px;border-radius:4px;
+      z-index:2;
+    }
     .badge-html{background:var(--cat-html-bg);color:var(--cat-html);border:1px solid var(--cat-html-border);}
     .badge-python{background:var(--cat-python-bg);color:var(--cat-python);border:1px solid var(--cat-python-border);}
     .badge-js{background:var(--cat-js-bg);color:var(--cat-js);border:1px solid var(--cat-js-border);}
     .badge-react{background:var(--cat-react-bg);color:var(--cat-react);border:1px solid var(--cat-react-border);}
+    /* botões prev / next */
+    .carousel-btn{
+      position:absolute;top:50%;z-index:3;
+      transform:translateY(-50%);
+      width:28px;height:28px;
+      background:rgba(250,247,242,.9);
+      border:1.5px solid var(--rule);
+      border-radius:50%;
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;color:var(--ink2);
+      opacity:0;
+      transition:opacity .2s,background .15s;
+      box-shadow:0 1px 6px rgba(28,25,23,.12);
+    }
+    .carousel-btn.prev{left:8px;}
+    .carousel-btn.next{right:8px;}
+    .card-carousel:hover .carousel-btn{opacity:1;}
+    .carousel-btn:hover{background:rgba(250,247,242,1);}
+    /* oculta botão se só 1 slide */
+    .carousel-btn:disabled{display:none;}
+    /* dots indicadores */
+    .carousel-dots{
+      position:absolute;
+      bottom:8px;left:50%;
+      transform:translateX(-50%);
+      display:flex;gap:5px;
+      z-index:3;
+    }
+    .carousel-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:rgba(250,247,242,.6);
+      border:1px solid rgba(28,25,23,.15);
+      transition:background .2s,transform .2s;
+      cursor:pointer;
+    }
+    .carousel-dot.active{
+      background:rgba(250,247,242,.95);
+      transform:scale(1.25);
+    }
+    /* oculta dots se só 1 slide */
+    .carousel-dots:has(.carousel-dot:only-child){display:none;}
+
+    /* CARD BODY */
     .card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column;gap:10px;}
     .card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
     .card-title{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--ink);line-height:1.3;}
@@ -129,12 +229,12 @@
     .card-link.primary{background:var(--ink);color:#fff;border-color:var(--ink);}
     .card-link.primary:hover{background:var(--ink2);}
     .card-link svg{width:13px;height:13px;flex-shrink:0;}
+    .card-link.disabled{opacity:.4;cursor:not-allowed;pointer-events:none;}
     .empty-state{display:none;grid-column:1/-1;text-align:center;padding:3rem 1rem;}
     .empty-state p{font-family:var(--font-serif);font-style:italic;font-size:16px;color:var(--ink4);}
     .back-section{text-align:center;margin-top:3rem;}
     .back-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--ink);text-decoration:none;padding:12px 24px;border-radius:8px;border:1.5px solid var(--rule);background:#fff;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s;}
     .back-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
-    .card-link.disabled{opacity:.4;cursor:not-allowed;pointer-events:none;}
     [data-i18n]{transition:opacity .18s ease;}
     .lang-switching [data-i18n]{opacity:0;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -151,7 +251,7 @@
 <body>
 
 <nav class="nav">
-  <a href="../index.html" class="nav-brand"><span></span> Lucilia's Notebook</a>
+  <a href="../index.html" class="nav-brand"><span>📓</span> Lucilia's Notebook</a>
   <div class="nav-links">
     <div class="nav-dropdown" id="navDropdown">
       <button class="nav-dropdown-btn" id="navDropdownBtn" onclick="toggleNavDropdown()">
@@ -227,39 +327,47 @@
 
     <div class="projects-grid" id="projectsGrid">
 
-      <!-- HTML & CSS — Projeto 1 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 1 — Lucilia's Notebook (HTML & CSS)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="html">
         <div class="card-bar bar-html"></div>
-        <div class="card-preview preview-html">
-          <span class="preview-icon">🎨</span>
-          <span class="preview-badge badge-html">HTML &amp; CSS</span>
+        <div class="card-carousel" data-images='[
+                "../img/project1.png",
+                "../img/project2.png",
+                "../img/project3.png",
+                "../img/project4.png"
+        ]' data-badge="badge-html" data-badge-text="HTML &amp; CSS">
         </div>
         <div class="card-body">
           <div class="card-header">
-            <h3 class="card-title" data-i18n="p1_title">Página de Portfólio</h3>
+            <h3 class="card-title" data-i18n="p1_title">Lucilia's Notebook</h3>
             <span class="card-status status-live"><span class="status-dot"></span><span data-i18n="status_live">Live</span></span>
           </div>
-          <p class="card-desc" data-i18n="p1_desc">Landing page pessoal responsiva com design editorial, seções de apresentação, habilidades e contato. Sem frameworks — apenas HTML semântico e CSS moderno.</p>
+          <p class="card-desc" data-i18n="p1_desc">Site de anotações de estudos com sistema de busca, carrossel e suporte a PT/EN. Interface completa com HTML, CSS e JS.</p>
           <div class="card-techs"><span class="tech-chip">HTML5</span><span class="tech-chip">CSS3</span><span class="tech-chip">Flexbox</span><span class="tech-chip">Grid</span><span class="tech-chip">Responsive</span></div>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/luciliarosa/perfilFrontEnd.git" target="_blank" class="card-link">
+          <a href="https://github.com/luciliarosa/notebookon.git" target="_blank" class="card-link">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
-          <a href="https://portifoliolucilia.vercel.app/" target="_blank" class="card-link primary">
+          <a href="https://lucilliarosa.com.br/notebook.html" target="_blank" class="card-link primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             <span data-i18n="btn_view">Ver projeto</span>
           </a>
         </div>
       </div>
 
-      <!-- HTML & CSS — Projeto 2 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 2 — UI Components Library (HTML & CSS)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="html">
         <div class="card-bar bar-html"></div>
-        <div class="card-preview preview-html">
-          <span class="preview-icon">🧩</span>
-          <span class="preview-badge badge-html">HTML &amp; CSS</span>
+        <div class="card-carousel" data-images='[
+          "COLOQUE_A_URL_DA_IMAGEM_1_AQUI",
+          "COLOQUE_A_URL_DA_IMAGEM_2_AQUI"
+        ]' data-badge="badge-html" data-badge-text="HTML &amp; CSS">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -270,25 +378,20 @@
           <div class="card-techs"><span class="tech-chip">HTML5</span><span class="tech-chip">CSS Variables</span><span class="tech-chip">Animations</span><span class="tech-chip">Dark Mode</span></div>
         </div>
         <div class="card-footer">
-          <!-- <a href="https://github.com/luciliarosa" target="_blank" class="card-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a> -->
           <a class="card-link disabled" aria-disabled="true" data-i18n="btn_no_repo">Sem repositório</a>
           <a class="card-link primary disabled" aria-disabled="true" data-i18n="btn_soon">Em breve</a>
-          <!-- <a href="#" target="_blank" class="card-link primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="btn_view">Ver projeto</span> -->
-          </a>
         </div>
       </div>
 
-      <!-- PYTHON — Projeto 3 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 3 — Automação de Relatórios (Python)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="python">
         <div class="card-bar bar-python"></div>
-        <div class="card-preview preview-python">
-          <span class="preview-icon">🤖</span>
-          <span class="preview-badge badge-python">Python</span>
+        <div class="card-carousel" data-images='[
+          "COLOQUE_A_URL_DA_IMAGEM_1_AQUI",
+          "COLOQUE_A_URL_DA_IMAGEM_2_AQUI"
+        ]' data-badge="badge-python" data-badge-text="Python">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -299,25 +402,20 @@
           <div class="card-techs"><span class="tech-chip">Python</span><span class="tech-chip">pandas</span><span class="tech-chip">openpyxl</span><span class="tech-chip">reportlab</span><span class="tech-chip">schedule</span></div>
         </div>
         <div class="card-footer">
-          <!-- <a href="https://github.com/luciliarosa" target="_blank" class="card-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="#" target="_blank" class="card-link primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="btn_view">Ver projeto</span>
-          </a> -->
           <a class="card-link disabled" aria-disabled="true" data-i18n="btn_no_repo">Sem repositório</a>
           <a class="card-link primary disabled" aria-disabled="true" data-i18n="btn_soon">Em breve</a>
         </div>
       </div>
 
-      <!-- PYTHON — Projeto 4 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 4 — Dashboard de Dados EAD (Python)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="python">
         <div class="card-bar bar-python"></div>
-        <div class="card-preview preview-python">
-          <span class="preview-icon">📊</span>
-          <span class="preview-badge badge-python">Python</span>
+        <div class="card-carousel" data-images='[
+          "COLOQUE_A_URL_DA_IMAGEM_1_AQUI",
+          "COLOQUE_A_URL_DA_IMAGEM_2_AQUI"
+        ]' data-badge="badge-python" data-badge-text="Python">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -328,25 +426,20 @@
           <div class="card-techs"><span class="tech-chip">Python</span><span class="tech-chip">pandas</span><span class="tech-chip">SQL</span><span class="tech-chip">Power BI</span><span class="tech-chip">CSV</span></div>
         </div>
         <div class="card-footer">
-          <!-- <a href="https://github.com/luciliarosa" target="_blank" class="card-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="#" target="_blank" class="card-link primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="btn_view">Ver projeto</span>
-          </a> -->
           <a class="card-link disabled" aria-disabled="true" data-i18n="btn_no_repo">Sem repositório</a>
           <a class="card-link primary disabled" aria-disabled="true" data-i18n="btn_soon">Em breve</a>
         </div>
       </div>
 
-      <!-- JAVASCRIPT — Projeto 5 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 5 — Task Manager App (JavaScript)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="js">
         <div class="card-bar bar-js"></div>
-        <div class="card-preview preview-js">
-          <span class="preview-icon">⚡</span>
-          <span class="preview-badge badge-js">JavaScript</span>
+        <div class="card-carousel" data-images='[
+          "COLOQUE_A_URL_DA_IMAGEM_1_AQUI",
+          "COLOQUE_A_URL_DA_IMAGEM_2_AQUI"
+        ]' data-badge="badge-js" data-badge-text="JavaScript">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -357,25 +450,20 @@
           <div class="card-techs"><span class="tech-chip">JavaScript</span><span class="tech-chip">DOM API</span><span class="tech-chip">LocalStorage</span><span class="tech-chip">Drag &amp; Drop</span></div>
         </div>
         <div class="card-footer">
-          <!-- <a href="https://github.com/luciliarosa" target="_blank" class="card-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="#" target="_blank" class="card-link primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="btn_view">Ver projeto</span>
-          </a> -->
           <a class="card-link disabled" aria-disabled="true" data-i18n="btn_no_repo">Sem repositório</a>
           <a class="card-link primary disabled" aria-disabled="true" data-i18n="btn_soon">Em breve</a>
         </div>
       </div>
 
-      <!-- JAVASCRIPT — Projeto 6 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 6 — Weather App (JavaScript)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="js">
         <div class="card-bar bar-js"></div>
-        <div class="card-preview preview-js">
-          <span class="preview-icon">🌦️</span>
-          <span class="preview-badge badge-js">JavaScript</span>
+        <div class="card-carousel" data-images='[
+          "COLOQUE_A_URL_DA_IMAGEM_1_AQUI",
+          "COLOQUE_A_URL_DA_IMAGEM_2_AQUI"
+        ]' data-badge="badge-js" data-badge-text="JavaScript">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -386,25 +474,20 @@
           <div class="card-techs"><span class="tech-chip">JavaScript</span><span class="tech-chip">Fetch API</span><span class="tech-chip">OpenWeather</span><span class="tech-chip">Async/Await</span></div>
         </div>
         <div class="card-footer">
-          <!-- <a href="https://github.com/luciliarosa" target="_blank" class="card-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.37 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="#" target="_blank" class="card-link primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="btn_view">Ver projeto</span>
-          </a> -->
           <a class="card-link disabled" aria-disabled="true" data-i18n="btn_no_repo">Sem repositório</a>
           <a class="card-link primary disabled" aria-disabled="true" data-i18n="btn_soon">Em breve</a>
         </div>
       </div>
 
-      <!-- REACT — Projeto 7 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 7 — Finance Tracker (React)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="react">
         <div class="card-bar bar-react"></div>
-        <div class="card-preview preview-react">
-          <span class="preview-icon">⚛️</span>
-          <span class="preview-badge badge-react">React</span>
+        <div class="card-carousel" data-images='[
+          "COLOQUE_A_URL_DA_IMAGEM_1_AQUI",
+          "COLOQUE_A_URL_DA_IMAGEM_2_AQUI"
+        ]' data-badge="badge-react" data-badge-text="React">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -415,25 +498,20 @@
           <div class="card-techs"><span class="tech-chip">React</span><span class="tech-chip">Hooks</span><span class="tech-chip">Recharts</span><span class="tech-chip">Context API</span><span class="tech-chip">Vite</span></div>
         </div>
         <div class="card-footer">
-          <!-- <a href="https://github.com/luciliarosa" target="_blank" class="card-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="#" target="_blank" class="card-link primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="btn_view">Ver projeto</span>
-          </a> -->
           <a class="card-link disabled" aria-disabled="true" data-i18n="btn_no_repo">Sem repositório</a>
           <a class="card-link primary disabled" aria-disabled="true" data-i18n="btn_soon">Em breve</a>
         </div>
       </div>
 
-      <!-- REACT — Projeto 8 -->
+      <!-- ═══════════════════════════════════════════════
+           PROJETO 8 — Kanban Board (React)
+           ═══════════════════════════════════════════════ -->
       <div class="project-card" data-cat="react">
         <div class="card-bar bar-react"></div>
-        <div class="card-preview preview-react">
-          <span class="preview-icon">📋</span>
-          <span class="preview-badge badge-react">React</span>
+        <div class="card-carousel" data-images='[
+          "COLOQUE_A_URL_DA_IMAGEM_1_AQUI",
+          "COLOQUE_A_URL_DA_IMAGEM_2_AQUI"
+        ]' data-badge="badge-react" data-badge-text="React">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -444,14 +522,6 @@
           <div class="card-techs"><span class="tech-chip">React</span><span class="tech-chip">DnD Kit</span><span class="tech-chip">Tailwind</span><span class="tech-chip">LocalStorage</span></div>
         </div>
         <div class="card-footer">
-          <!-- <a href="https://github.com/luciliarosa" target="_blank" class="card-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="#" target="_blank" class="card-link primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="btn_view">Ver projeto</span>
-          </a> -->
           <a class="card-link disabled" aria-disabled="true" data-i18n="btn_no_repo">Sem repositório</a>
           <a class="card-link primary disabled" aria-disabled="true" data-i18n="btn_soon">Em breve</a>
         </div>
@@ -473,13 +543,14 @@
 </div>
 
 <script>
+/* ─── i18n ─── */
 const T = {
   pt:{
     nav_profile:"Perfil &amp; Projetos ▾",
     nav_dd_about:"Sobre mim",nav_dd_about_desc:"Trajetória, habilidades e história",
     nav_dd_projects:"Projetos",nav_dd_projects_desc:"HTML, Python, JavaScript e React",
     nav_dd_areas:"Frontend, Backend &amp; Fullstack",nav_dd_areas_desc:"O que é cada área e como se conectam",
-    nav_home:"Home",nav_this:"Projetos",nav_back:"← Voltar",
+    nav_home:"Home",nav_this:"Projetos",
     eyebrow:"// meus projetos",
     hero_title:"O que eu<br><em>construí</em>",
     hero_sub:"Projetos reais, estudos e experimentos. Cada um representa uma etapa da jornada — do HTML puro até automações em Python e interfaces em React.",
@@ -488,7 +559,7 @@ const T = {
     status_live:"Live",status_wip:"Em andamento",status_study:"Estudo",
     empty_msg:"Nenhum projeto encontrado nessa categoria ainda. 🌱",
     back_btn:"📓 Voltar para o Notebook",
-    p1_title:"Página de Portfólio",p1_desc:"Landing page pessoal responsiva com design editorial, seções de apresentação, habilidades e contato. Sem frameworks — apenas HTML semântico e CSS moderno.",
+    p1_title:"Lucilia's Notebook",p1_desc:"Site de anotações de estudos com sistema de busca, carrossel e suporte a PT/EN. Interface completa com HTML, CSS e JS.",
     p2_title:"UI Components Library",p2_desc:"Coleção de componentes visuais reutilizáveis — cards, botões, formulários, badges e tipografia — criados do zero com CSS puro e variáveis customizadas.",
     p3_title:"Automação de Relatórios",p3_desc:"Script que coleta dados de planilhas Excel, processa indicadores e gera relatórios em PDF automaticamente via agendamento. Usado internamente no SENAI.",
     p4_title:"Dashboard de Dados EAD",p4_desc:"Pipeline de dados que processa indicadores educacionais — acesso, conclusão e evasão — e alimenta visualizações no Power BI via CSV estruturado.",
@@ -496,15 +567,14 @@ const T = {
     p6_title:"Weather App",p6_desc:"App de previsão do tempo que consome a API OpenWeatherMap, exibe condições atuais, previsão de 5 dias e troca de unidades °C/°F em tempo real.",
     p7_title:"Finance Tracker",p7_desc:"App de controle financeiro pessoal com categorização de despesas, gráficos interativos de gastos por mês e exportação para CSV. Construído com React + Recharts.",
     p8_title:"Kanban Board",p8_desc:"Quadro kanban com colunas customizáveis, drag-and-drop entre colunas, tags coloridas por prioridade e persistência em localStorage. Inspirado no Trello.",
-    btn_no_repo:"Sem repositório",
-    btn_soon:"Em breve",
+    btn_no_repo:"Sem repositório",btn_soon:"Em breve",
   },
   en:{
     nav_profile:"Profile &amp; Projects ▾",
     nav_dd_about:"About me",nav_dd_about_desc:"Background, skills and story",
     nav_dd_projects:"Projects",nav_dd_projects_desc:"HTML, Python, JavaScript and React",
     nav_dd_areas:"Frontend, Backend &amp; Fullstack",nav_dd_areas_desc:"What each area is and how they connect",
-    nav_home:"Home",nav_this:"Projects",nav_back:"← Back",
+    nav_home:"Home",nav_this:"Projects",
     eyebrow:"// my projects",
     hero_title:"What I've<br><em>built</em>",
     hero_sub:"Real projects, studies and experiments. Each one represents a step in the journey — from plain HTML to Python automation and React interfaces.",
@@ -513,7 +583,7 @@ const T = {
     status_live:"Live",status_wip:"In progress",status_study:"Study",
     empty_msg:"No projects found in this category yet. 🌱",
     back_btn:"📓 Back to the Notebook",
-    p1_title:"Portfolio Page",p1_desc:"Responsive personal landing page with editorial design, about, skills and contact sections. No frameworks — just semantic HTML and modern CSS.",
+    p1_title:"Lucilia's Notebook",p1_desc:"Study notes site with search system, carousel and PT/EN support. Full interface with HTML, CSS and JS.",
     p2_title:"UI Components Library",p2_desc:"Collection of reusable visual components — cards, buttons, forms, badges and typography — built from scratch with pure CSS and custom properties.",
     p3_title:"Report Automation",p3_desc:"Script that collects data from Excel spreadsheets, processes indicators and automatically generates PDF reports on a schedule. Used internally at SENAI.",
     p4_title:"EAD Data Dashboard",p4_desc:"Data pipeline that processes educational indicators — access, completion and dropout — and feeds Power BI visualizations via structured CSV files.",
@@ -521,13 +591,11 @@ const T = {
     p6_title:"Weather App",p6_desc:"Weather forecast app consuming the OpenWeatherMap API, showing current conditions, 5-day forecast and real-time °C/°F unit toggle.",
     p7_title:"Finance Tracker",p7_desc:"Personal finance control app with expense categorization, interactive monthly spending charts and CSV export. Built with React + Recharts.",
     p8_title:"Kanban Board",p8_desc:"Kanban board with customizable columns, drag-and-drop between columns, color-coded priority tags and localStorage persistence. Inspired by Trello.",
-    btn_no_repo:"No repository",
-    btn_soon:"Coming soon",
+    btn_no_repo:"No repository",btn_soon:"Coming soon",
   }
 };
 
 let lang = localStorage.getItem('nb_lang') || 'pt';
-
 function setLang(l){
   lang=l; localStorage.setItem('nb_lang',l);
   document.body.classList.add('lang-switching');
@@ -543,49 +611,162 @@ function setLang(l){
     document.body.classList.remove('lang-switching');
   },180);
 }
-
 if(lang==='en') setLang('en');
 
-function filterCat(cat){
-  document.querySelectorAll('.filter-btn').forEach(b=>{
-    b.classList.toggle('active',b.getAttribute('data-cat')===cat);
+/* ─── CARROSSEL ─── */
+function buildCarousels(){
+  document.querySelectorAll('.card-carousel').forEach(container => {
+    const raw = container.getAttribute('data-images');
+    const badgeClass  = container.getAttribute('data-badge');
+    const badgeText   = container.getAttribute('data-badge-text') || '';
+    let images = [];
+    try { images = JSON.parse(raw); } catch(e){}
+
+    // filtra apenas URLs que não são o placeholder
+    const validImgs = images.filter(u =>
+      u && !u.startsWith('COLOQUE') && u.trim() !== ''
+    );
+
+    /* ── badge de tecnologia ── */
+    const badge = document.createElement('span');
+    badge.className = `preview-badge ${badgeClass}`;
+    badge.innerHTML = badgeText;
+    container.appendChild(badge);
+
+    /* ── sem imagens: placeholder ── */
+    if(validImgs.length === 0){
+      const ph = document.createElement('div');
+      ph.className = 'carousel-placeholder';
+      ph.innerHTML = '<span>🖼️</span><p>imagens em breve</p>';
+      container.appendChild(ph);
+      return;
+    }
+
+    /* ── track de slides ── */
+    const track = document.createElement('div');
+    track.className = 'carousel-track';
+
+    validImgs.forEach(src => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.draggable = false;
+      slide.appendChild(img);
+      track.appendChild(slide);
+    });
+    container.appendChild(track);
+
+    /* ── dots ── */
+    const dotsWrap = document.createElement('div');
+    dotsWrap.className = 'carousel-dots';
+    validImgs.forEach((_, i) => {
+      const d = document.createElement('span');
+      d.className = 'carousel-dot' + (i===0?' active':'');
+      d.addEventListener('click', e => { e.stopPropagation(); goTo(i); });
+      dotsWrap.appendChild(d);
+    });
+    container.appendChild(dotsWrap);
+
+    /* ── botões prev / next ── */
+    const btnPrev = document.createElement('button');
+    btnPrev.className = 'carousel-btn prev';
+    btnPrev.innerHTML = '&#8592;';
+    btnPrev.setAttribute('aria-label','Anterior');
+    const btnNext = document.createElement('button');
+    btnNext.className = 'carousel-btn next';
+    btnNext.innerHTML = '&#8594;';
+    btnNext.setAttribute('aria-label','Próximo');
+
+    if(validImgs.length <= 1){
+      btnPrev.disabled = true;
+      btnNext.disabled = true;
+    }
+    container.appendChild(btnPrev);
+    container.appendChild(btnNext);
+
+    let current = 0;
+
+    function goTo(n){
+      current = (n + validImgs.length) % validImgs.length;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i) =>
+        d.classList.toggle('active', i === current)
+      );
+    }
+
+    btnPrev.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+    btnNext.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+
+    /* ── autoplay (pausa no hover) ── */
+    let timer = validImgs.length > 1
+      ? setInterval(() => goTo(current + 1), 3000)
+      : null;
+
+    container.addEventListener('mouseenter', () => { if(timer){ clearInterval(timer); timer=null; } });
+    container.addEventListener('mouseleave', () => {
+      if(validImgs.length > 1 && !timer)
+        timer = setInterval(() => goTo(current + 1), 3000);
+    });
+
+    /* ── swipe touch ── */
+    let touchStartX = 0;
+    container.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+    container.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if(Math.abs(dx) > 40) goTo(dx < 0 ? current+1 : current-1);
+    });
   });
-  const cards=document.querySelectorAll('.project-card');
-  let visible=0;
-  cards.forEach(card=>{
-    const match=cat==='all'||card.getAttribute('data-cat')===cat;
-    card.classList.toggle('hidden',!match);
-    if(match) visible++;
-  });
-  document.getElementById('emptyState').style.display=visible===0?'block':'none';
-  document.getElementById('stat-total').textContent=visible;
 }
 
+/* ─── FILTROS ─── */
+function filterCat(cat){
+  document.querySelectorAll('.filter-btn').forEach(b =>
+    b.classList.toggle('active', b.getAttribute('data-cat')===cat)
+  );
+  const cards = document.querySelectorAll('.project-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const match = cat==='all' || card.getAttribute('data-cat')===cat;
+    card.classList.toggle('hidden', !match);
+    if(match) visible++;
+  });
+  document.getElementById('emptyState').style.display = visible===0 ? 'block' : 'none';
+  document.getElementById('stat-total').textContent = visible;
+}
+
+/* ─── STATS ─── */
 (function buildStats(){
-  const cards=document.querySelectorAll('.project-card');
-  document.getElementById('stat-total').textContent=cards.length;
-  const counts={html:0,python:0,js:0,react:0};
-  cards.forEach(c=>{ const k=c.getAttribute('data-cat'); if(counts[k]!==undefined) counts[k]++; });
-  document.getElementById('stat-html').textContent=counts.html;
-  document.getElementById('stat-python').textContent=counts.python;
-  document.getElementById('stat-js').textContent=counts.js;
-  document.getElementById('stat-react').textContent=counts.react;
+  const cards = document.querySelectorAll('.project-card');
+  document.getElementById('stat-total').textContent = cards.length;
+  const counts = {html:0,python:0,js:0,react:0};
+  cards.forEach(c => { const k=c.getAttribute('data-cat'); if(counts[k]!==undefined) counts[k]++; });
+  document.getElementById('stat-html').textContent   = counts.html;
+  document.getElementById('stat-python').textContent = counts.python;
+  document.getElementById('stat-js').textContent     = counts.js;
+  document.getElementById('stat-react').textContent  = counts.react;
 })();
 
+/* ─── NAV DROPDOWN ─── */
 function toggleNavDropdown(){
-  const btn=document.getElementById('navDropdownBtn');
-  const panel=document.getElementById('navDropdownPanel');
-  const open=panel.classList.contains('open');
+  const btn   = document.getElementById('navDropdownBtn');
+  const panel = document.getElementById('navDropdownPanel');
+  const open  = panel.classList.contains('open');
   btn.classList.toggle('open',!open);
   panel.classList.toggle('open',!open);
 }
-document.addEventListener('click',e=>{
-  const dd=document.getElementById('navDropdown');
-  if(dd&&!dd.contains(e.target)){
+document.addEventListener('click', e => {
+  const dd = document.getElementById('navDropdown');
+  if(dd && !dd.contains(e.target)){
     document.getElementById('navDropdownBtn')?.classList.remove('open');
     document.getElementById('navDropdownPanel')?.classList.remove('open');
   }
 });
+
+/* ─── INIT ─── */
+buildCarousels();
 </script>
 </body>
 </html>
