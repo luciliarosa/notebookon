@@ -107,7 +107,7 @@ const T = {
       nav_areas:"Frontend · Backend · Fullstack", nav_notebook:"Study Notebook",
       eyebrow:"// fullstack & automation developer",
       hero_title:"Fullstack &amp; Automation Developer", hero_badge:"São Paulo, BR",
-      hero_bio:"Developer focused on automation and web applications.",
+      hero_bio:"Developer focused on automation and web applications, driven by continuous learning. Passionate about writing clean, maintainable code, building intuitive user experiences, and solving real-world problems with technology.",
       cta_projects:"View projects", cta_about:"About me",
       hero_status:"Open to opportunities",
       sec_skills:"Skills", sec_projects:"Featured projects", sec_about:"About me",
